@@ -71,6 +71,154 @@ const menus = [
         ]
 
       },
+       {
+        path: '/catalogo/almacenes',
+        title: 'almacenes!',
+        replace: '/catalogo/almacenes/list',
+        icon: 'usb',
+        routes: [
+          {
+            path: '/catalogo/almacenes/list',
+            title: 'list cat!',
+          },
+          {
+            path: '/catalogo/almacenes/new',
+            title: 'new cat!',
+          },
+          {
+            path: '/catalogo/almacenes/edit/:id',
+            title: 'edit cat!',
+          }
+        ]
+
+      },
+      {
+        path: '/catalogo/compras',
+        title: 'compras!',
+        replace: '/catalogo/compras/list',
+        icon: 'usb',
+        routes: [
+          {
+            path: '/catalogo/compras/list',
+            title: 'list cat!',
+          },
+          {
+            path: '/catalogo/compras/new',
+            title: 'new cat!',
+          },
+          {
+            path: '/catalogo/compras/edit/:id',
+            title: 'edit cat!',
+          }
+        ]
+
+      },
+      {
+        path: '/catalogo/detalleCompras',
+        title: 'detalleCompras!',
+        replace: '/catalogo/detalleCompras/list',
+        icon: 'usb',
+        routes: [
+          {
+            path: '/catalogo/detalleCompras/list',
+            title: 'list cat!',
+          },
+          {
+            path: '/catalogo/detalleCompras/new',
+            title: 'new cat!',
+          },
+          {
+            path: '/catalogo/detalleCompras/edit/:id',
+            title: 'edit cat!',
+          }
+        ]
+
+      },
+      {
+        path: '/catalogo/detalleVentas',
+        title: 'detalleVentas!',
+        replace: '/catalogo/detalleVentas/list',
+        icon: 'usb',
+        routes: [
+          {
+            path: '/catalogo/detalleVentas/list',
+            title: 'list cat!',
+          },
+          {
+            path: '/catalogo/detalleVentas/new',
+            title: 'new cat!',
+          },
+          {
+            path: '/catalogo/detalleVentas/edit/:id',
+            title: 'edit cat!',
+          }
+        ]
+
+      },
+       {
+        path: '/catalogo/productos',
+        title: 'productos!',
+        replace: '/catalogo/productos/list',
+        icon: 'usb',
+        routes: [
+          {
+            path: '/catalogo/productos/list',
+            title: 'list cat!',
+          },
+          {
+            path: '/catalogo/productos/new',
+            title: 'new cat!',
+          },
+          {
+            path: '/catalogo/productos/edit/:id',
+            title: 'edit cat!',
+          }
+        ]
+
+      },
+       {
+        path: '/catalogo/proveedores',
+        title: 'proveedores!',
+        replace: '/catalogo/proveedores/list',
+        icon: 'usb',
+        routes: [
+          {
+            path: '/catalogo/proveedores/list',
+            title: 'list cat!',
+          },
+          {
+            path: '/catalogo/proveedores/new',
+            title: 'new cat!',
+          },
+          {
+            path: '/catalogo/proveedores/edit/:id',
+            title: 'edit cat!',
+          }
+        ]
+
+      },
+      {
+        path: '/catalogo/ventas',
+        title: 'ventas!',
+        replace: '/catalogo/ventas/list',
+        icon: 'usb',
+        routes: [
+          {
+            path: '/catalogo/ventas/list',
+            title: 'list cat!',
+          },
+          {
+            path: '/catalogo/ventas/new',
+            title: 'new cat!',
+          },
+          {
+            path: '/catalogo/ventas/edit/:id',
+            title: 'edit cat!',
+          }
+        ]
+
+      },
+
       {
         path: '/catalogo/autors',
         title: 'autors!',

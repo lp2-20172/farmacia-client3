@@ -1,5 +1,5 @@
 import axios from 'axios'
 const client = axios.create({
-    baseURL: "https://eventos-serve.herokuapp.com"
+    baseURL: "https://farmacia-serve.herokuapp.com"
 })
 export default client
