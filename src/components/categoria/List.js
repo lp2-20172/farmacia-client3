@@ -1,75 +1,128 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import Card, { CardHeader, CardContent } from 'material-ui/Card'
+import Avatar from 'material-ui/Avatar'
+import Typography from 'material-ui/Typography'
+import TextField from 'material-ui/TextField';
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Paper from 'material-ui/Paper';
+
 import { getList, del } from '../../actions/categoria-action'
+import { connect } from 'react-redux'
+
+import Button from 'material-ui/Button';
+import AddIcon from 'material-ui-icons/Add';
 import {
     Link
 } from 'react-router-dom'
 
 
 class List extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            q: "",
-        }
-    }
-
     componentWillMount() {
-        this.props.getList(this.state.q)
+        this.props.getList("")
     }
-    handleInputChange = event => {
-        const target = event.target
-        const value = target.type === 'checkbox' ? target.checked : target.value
-        const name = target.name
 
-        this.setState({
-            [name]: value
-        })
-        this.props.getList(this.state.q)
+    change = (e) => {
+        const q = e.target.value
+        console.log("q:" + q)
+        this.props.getList(q)
+    }
+
+    handleClick = () => {
+        this.props.history.push('/catalogo/categorias/new');
     }
 
     render() {
-        
         let { list, del } = this.props
-        if (list === null) {
-            list = []
+        if (list) {
+            
+        } else{
+            list =[]
+
         }
+
         return (
-            <div>
-                <h2>Categoria List</h2>
-                <label>Buscar:
-            <input type="text"
-                        value={this.state.q}
-                        onChange={this.handleInputChange}
-                        name="q" />
-                </label>
-                <Link to="/catalogo/categorias/new">New Categoria</Link>
-                <table>
-                    <tbody>
-                        {list.map((d, i) => (
-                            <tr key={i}>
-                                <td>{i + 1}</td>
-                                <td> {d.codigo} - {d.nombre}</td>
-                                <td><Link to={`/catalogo/categorias/edit/${d.id}`}>Edit</Link>
-                                </td>
-                                <td>
-                                    <button onClick={() => del(d.id)} > X </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        )
+
+            <Card>
+                <CardHeader
+                    avatar={
+                        <Avatar aria-label="Recipe" >
+                            C
+                          </Avatar>
+                    }
+                    title="Lista de Categorias"
+                    subheader="Noviembre, 07 del 2017"
+                />
+
+                <CardContent>
+                    <Typography component="p">
+                        q={this.props.q}
+                    </Typography>
+
+                    <TextField
+                        id="search"
+                        label="Buscar"
+                        value={this.props.q}
+                        onChange={this.change}
+                        margin="normal"
+                    />
+
+                    <Button fab color="primary" aria-label="add" onClick={this.handleClick}>
+                        <AddIcon />
+                    </Button>
+
+                    <Paper style={{
+                        overflowX: 'auto',
+                    }}>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>#</TableCell>
+                                    <TableCell >Nombre Categoria</TableCell>
+                                    <TableCell >Opciones</TableCell>
+                                </TableRow>
+                            </TableHead>
+
+                            <TableBody>
+                                {list.map((d, index) =>
+                                    <TableRow key={index}>
+                                        <TableCell numeric>{index + 1}</TableCell>
+                                        <TableCell >{d.nombre}</TableCell>
+                                        
+                                        <TableCell >
+                                            <Link to={`/catalogo/categorias/edit/${d.id}`} className="ui basic button green">Edit</Link>
+                                        
+                                            <Button onClick={() => del(d.id, this.props.history)} >Delete</Button>
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+                            </TableBody>
+                        </Table>
+                    </Paper>
+                </CardContent>
+
+            </Card>
+        );
     }
 }
 List.propTypes = {
     list: PropTypes.array
 }
+
 const mapStateToProps = (state) => {
-    return { list: state.categoria.list }
+    return {
+        list: state.categoria.list
+    }
 }
+
+/*
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getList: (q) => { dispatch(getList(q)) },
+        del: (id, h) => { dispatch(del(id, h)) }
+    }
+}
+*/
 export default connect(mapStateToProps, {
     getList,
     del
