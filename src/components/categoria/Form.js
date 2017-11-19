@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import TextField from 'material-ui/TextField';
 import { save, getById, update } from '../../actions/categoria-action'
 
 class Form extends Component {
@@ -66,20 +67,17 @@ class Form extends Component {
         //const { list } = this.props
         return (
             <div>
+                <TextField
+                        id="nombre"
+                        label="Nombre"
+                        name="nombre"
+                        value={this.state.nombre}
+                        onChange={this.handleInputChange}
+                        margin="normal"
+                    /> 
                 <form onSubmit={this.handleSubmit}>
-                    <label>Codigo:
-            <input type="text"
-                            value={this.state.codigo}
-                            onChange={this.handleInputChange}
-                            name="codigo" />
-                    </label><br />
-                    <label>Nombre:
-            <input type="text"
-                            value={this.state.nombre}
-                            onChange={this.handleInputChange}
-                            name="nombre" />
-                    </label>
-                    <input type="submit" value="Submit" />
+
+                    <input type="submit" value="Guardar Cambios" />
                 </form>
 
             </div>
