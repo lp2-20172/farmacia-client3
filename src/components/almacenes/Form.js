@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Button from 'material-ui/Button';    
+import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux'
 import { save, getById, update } from '../../actions/almacen-action'
 
@@ -66,20 +68,29 @@ class Form extends Component {
         //const { list } = this.props
         return (
             <div>
+                <TextField
+                value={this.state.nombre}
+                onChange={this.handleInputChange}
+                name="nombre"
+                label="Nombre Almacen"
+                placeholder="Nombre"
+                multiline
+                margin="normal"
+                />
+                <br></br>
+                <TextField
+                value={this.state.direccion}
+                onChange={this.handleInputChange}
+                name="direccion"
+                label="Direccion"
+                placeholder="Direccion"
+                multiline
+                margin="normal"
+                />
                 <form onSubmit={this.handleSubmit}>
-                    <label>Codigo:
-            <input type="text"
-                            value={this.state.codigo}
-                            onChange={this.handleInputChange}
-                            name="codigo" />
-                    </label><br />
-                    <label>Nombre:
-            <input type="text"
-                            value={this.state.nombre}
-                            onChange={this.handleInputChange}
-                            name="nombre" />
-                    </label>
-                    <input type="submit" value="Submit" />
+                    <Button type="submit" raised color="primary">
+                        Guardar
+                    </Button>
                 </form>
 
             </div>
