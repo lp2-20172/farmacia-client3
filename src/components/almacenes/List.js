@@ -78,7 +78,8 @@ class List extends Component {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>#</TableCell>
-                                    <TableCell >Nombre Categoria</TableCell>
+                                    <TableCell >Nombre</TableCell>
+                                    <TableCell >Direccion</TableCell>
                                     <TableCell >Opciones</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -88,11 +89,17 @@ class List extends Component {
                                     <TableRow key={index}>
                                         <TableCell numeric>{index + 1}</TableCell>
                                         <TableCell >{d.nombre}</TableCell>
-                                        
+                                        <TableCell >{d.direccion}</TableCell>
                                         <TableCell >
-                                            <Link to={`/catalogo/categorias/edit/${d.id}`} className="ui basic button green">Edit</Link>
+                                        <Link to={`/catalogo/almacenes/edit/${d.id}`}>
+                                    <Button  aria-label="edit">
+                                        <ModeEditIcon />
+                                    </Button>
+                                </Link>
                                         
-                                            <Button onClick={() => del(d.id, this.props.history)} >Delete</Button>
+                                <IconButton onClick={() => del(d.id)}  aria-label="Delete">
+                                <DeleteIcon/>
+                                </IconButton>
                                         </TableCell>
                                     </TableRow>
                                 )}
