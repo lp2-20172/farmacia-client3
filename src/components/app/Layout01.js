@@ -97,7 +97,7 @@ class PersistentDrawer extends React.Component {
               </Typography>
               <title>
                 {title.parent ? title.parent + (title.children ? ' > ' : '') + title.children : title.children}
-                - System
+                - Farmacia
               </title>
               <div className={classes.grow} />
               <IconButton
