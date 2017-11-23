@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getList, del } from '../../actions/almacen-action'
+import Button from 'material-ui/Button';
+import DeleteIcon from 'material-ui-icons/Delete';
+import IconButton from 'material-ui/IconButton';
+import TextField from 'material-ui/TextField';
+import ModeEditIcon from 'material-ui-icons/ModeEdit';
 import {
     Link
 } from 'react-router-dom'
@@ -38,23 +43,42 @@ class List extends Component {
         return (
             <div>
                 <h2>Almacen List</h2>
-                <label>Buscar:
-            <input type="text"
-                        value={this.state.q}
-                        onChange={this.handleInputChange}
-                        name="q" />
+                <label>
+                <TextField
+                id="search"
+                label="Buscar"
+                type="search" 
+                value={this.state.q}
+                onChange={this.handleInputChange}
+                name="q"
+                margin="normal"
+                />
                 </label>
-                <Link to="/catalogo/almacenes/new">New Almacen</Link>
+                <Button
+                    icon={{name: 'search'}}
+                    component={Link}
+                    raised
+                    to="/catalogo/almacenes/new"
+                    raised color="accent"
+                >
+                    {'Agregar   '}
+                </Button>>
                 <table>
                     <tbody>
                         {list.map((d, i) => (
                             <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td> {d.codigo} - {d.nombre}</td>
-                                <td><Link to={`/catalogo/almacenes/edit/${d.id}`}>Edit</Link>
+                                <td><Link to={`/catalogo/almacenes/edit/${d.id}`}>
+                                    <Button  aria-label="edit">
+                                        <ModeEditIcon />
+                                    </Button>
+                                </Link>
                                 </td>
                                 <td>
-                                    <button onClick={() => del(d.id)} > X </button>
+                                <IconButton onClick={() => del(d.id)}  aria-label="Delete">
+                                <DeleteIcon/>
+                                </IconButton>
                                 </td>
                             </tr>
                         ))}
