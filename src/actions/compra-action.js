@@ -1,33 +1,19 @@
-//import axios from "axios";
-
 import client from './'
 
-//https://github.com/brandiqa/redux-crud-example/blob/master/src/actions/contact-actions.js#L22
+const url = "/api-catalogo/compras/"
+export const COMPRA_LIST = "COMPRA_LIST"
+export const compraList = (list) => (
+    {
+        type: COMPRA_LIST,
+        list
+    }
+)
 
-const url = '/api-catalogo/compras/'
-
-export const COMPRA_LIST_REQUEST = "COMPRA_LIST_REQUEST"
-export const COMPRA_LIST_SUCCESS = 'COMPRA_LIST_SUCCESS'
 export const COMPRA_LIST_FAILURE = 'COMPRA_LIST_FAILURE'
-
-export const compraList = () => ({
-    type: COMPRA_LIST_REQUEST,
-})
-
-export const compraListSuccess = (list) => ({
-    type: COMPRA_LIST_SUCCESS,
-    list
-})
-
 export const compraListFailure = error => ({
     type: COMPRA_LIST_FAILURE,
     error
 })
-
-export const COMPRA_ADD = "COMPRA_ADD"
-export const COMPRA_FETCH = "COMPRA_FETCH"
-export const COMPRA_UPDATE = "COMPRA_UPDATE"
-export const COMPRA_DELETE = "COMPRA_DELETE"
 
 export const getList = (q = '') => {
     let params = {
@@ -37,92 +23,118 @@ export const getList = (q = '') => {
     }
     return (dispatch) => {
         client.get(url, params).then(r => {
-            dispatch(compraListSuccess(r.data))
-        }).catch(error => { //throw (error)
+            dispatch(compraList(r.data))
+        }).catch(error => {
+            //throw (error)
             //console.log('getList catch:' + JSON.stringify(error.response))
             if (error.response) {
                 dispatch(compraListFailure(error.response.data.detail))
             } else if (error.request) {
                 console.log(error.request);
-                dispatch(compraListFailure(JSON.stringify('Error '+error.request)))
+                dispatch(compraListFailure(JSON.stringify('Error ' + error.request)))
             } else {
                 // Something happened in setting up the request that triggered an Error
                 console.log('Error', error.message);
-                dispatch(compraListFailure('Error '+error.message))
+                dispatch(compraListFailure('Error ' + error.message))
             }
             //console.log(error.config);
+
         })
     }
 }
 
-export function save(data, history) {
-    console.log('save data:' + JSON.stringify(data))
+
+export const COMPRA_ADD = "COMPRA_ADD"
+export const compraAdd = () => (
+    {
+        type: COMPRA_ADD,
+    }
+)
+export const save = (d, h) => {
     return (dispatch) => {
-        return client.post(url, data)
-            .then((r) => {
-                dispatch({
-                    "type": COMPRA_ADD,
-                    "data": r.data //no usado
+        return new Promise((resolve, reject) => {
+            try {
+                client.post(url, d).then(r => {
+                    dispatch(compraAdd())
+                    resolve(h)
                 })
-                history.push('/catalogo/compras/list')
-            })
-            .catch((error) => {
-                console.log(error)
-                throw (error)
-            })
+            } catch (err) {
+                reject(err)
+            }
+        })
     }
 }
 
-export function getById(id) {
-    return dispatch => {
-        return client.get(`${url}${id}`)
-            .then((r) => {
-                /*
-                dispatch({
-                    "type": CATEGORIA_FETCH,
-                    "data": r.data 
-                })
-                */
-                return r.data
-            })
-            .catch((error) => {
-                console.log(error)
-                //throw (error)
-            })
-    }
-}
 
-export function update(data, history) {
+export const getById = (id) => {
     return (dispatch) => {
-        return client.put(`${url}${data.id}/`, data)
-            .then((r) => {
-                dispatch({
-                    "type": COMPRA_UPDATE,
-                    "data": r.data //no usado
+        return client.get(`${url}${id}`).then(r => {
+            return r.data
+        })
+    }
+}
+/*
+export const COMPRA_FETCH = "COMPRA_FETCH"
+export const compraFetch = (data) => (
+    {
+        type: COMPRA_FETCH,
+        dCOMPRA
+)
+export const getByIdx = (id) => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            try {
+                client.get(`${url}${id}`).then(r => {
+                    dispatch(copmraFetch(r.data))
+                    resolve(r)
                 })
-                history.push('/catalogo/compras/list')
-            })
-            .catch((error) => {
-                console.log(error)
-                throw (error)
-            })
+            } catch (err) {
+                reject(err)
+            }
+        })
+    }
+}
+*/
+export const COMPRA_UPDATE = "COMPRA_UPDATE"
+export const compraUpdate = () => (
+    {
+        type: COMPRA_UPDATE,
+    }
+)
+export const update = (d, h) => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            try {
+                client.put(`${url}${d.id}/`, d).then(r => {
+                    dispatch(compraUpdate())
+                    resolve(h)
+                })
+            } catch (err) {
+                reject(err)
+            }
+        })
     }
 }
 
-export function del(_id, history) {
-    return dispatch => {
-        return client.delete(`${url}${_id}`)
-            .then((r) => {
-                //console.log('deletex r:' + JSON.stringify(r))
-                dispatch({
-                    "type": COMPRA_DELETE,
-                    "data": _id
+export const COMPRA_DELETE = "COMPRA_DELETE"
+export const compraDelete = (data) => (
+    {
+        type: COMPRA_DELETE,
+        data
+    }
+)
+
+export const del = (id) => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            try {
+                client.delete(`${url}${id}`).then(r => {
+                    dispatch(compraDelete(id))
+                    resolve(r)
                 })
-                //history.push('/catalogo/categorias')
-            })
-            .catch((error) => {
-                console.log(error)
-                throw (error)
-            })
+            } catch (err) {
+                reject(err)
+            }
+        })
     }
 }

@@ -19,6 +19,10 @@ class Form extends Component {
             nombre: ''
         }*/
     }
+    handleSubmit(event) {
+        alert('Your favorite flavor is: ' + this.state.value);
+        event.preventDefault();
+      }
 
     componentDidMount() {
         const { id } = this.props.match.params
@@ -68,6 +72,7 @@ class Form extends Component {
         //const { list } = this.props
         return (
             <div>
+                <center>
                 <TextField
                 value={this.state.nombre}
                 onChange={this.handleInputChange}
@@ -92,8 +97,9 @@ class Form extends Component {
                         Guardar
                     </Button>
                 </form>
-
+                </center>
             </div>
+            
         )
     }
 }
