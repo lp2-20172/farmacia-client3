@@ -3,7 +3,7 @@ const menus = [
   {
     path: '/home',
     title: 'Home!',
-    icon: 'home',
+    icon: 'telegram',
   },
   {
     path: '/sandwiches',
@@ -47,14 +47,14 @@ const menus = [
   },
   {
     path: '/catalogo',
-    title: 'catalogo!',
-    icon: 'list',
+    title: 'Catalogo',
+    icon: 'dns',
     routes: [
       {
         path: '/catalogo/categorias',
         title: 'categorias!',
         replace: '/catalogo/categorias/list',
-        icon: 'usb',
+        icon: 'navicon',
         routes: [
           {
             path: '/catalogo/categorias/list',
@@ -75,7 +75,7 @@ const menus = [
         path: '/catalogo/almacenes',
         title: 'almacenes!',
         replace: '/catalogo/almacenes/list',
-        icon: 'usb',
+        icon: 'adn',
         routes: [
           {
             path: '/catalogo/almacenes/list',
@@ -96,7 +96,7 @@ const menus = [
         path: '/catalogo/compras',
         title: 'Compras',
         replace: '/catalogo/compras/list',
-        icon: 'account_balance_wallet',
+        icon: 'cart-plus',
         routes: [
           {
             path: '/catalogo/compras/list',
@@ -117,7 +117,7 @@ const menus = [
         path: '/catalogo/detalleCompras',
         title: 'detalleCompras!',
         replace: '/catalogo/detalleCompras/list',
-        icon: 'usb',
+        icon: 'shopping-bag',
         routes: [
           {
             path: '/catalogo/detalleCompras/list',
@@ -138,7 +138,7 @@ const menus = [
         path: '/catalogo/detalleVentas',
         title: 'detalleVentas!',
         replace: '/catalogo/detalleVentas/list',
-        icon: 'usb',
+        icon: 'cart-arrow-down',
         routes: [
           {
             path: '/catalogo/detalleVentas/list',
@@ -159,7 +159,7 @@ const menus = [
         path: '/catalogo/productos',
         title: 'productos!',
         replace: '/catalogo/productos/list',
-        icon: 'usb',
+        icon: 'list',
         routes: [
           {
             path: '/catalogo/productos/list',
@@ -180,7 +180,7 @@ const menus = [
         path: '/catalogo/proveedores',
         title: 'proveedores!',
         replace: '/catalogo/proveedores/list',
-        icon: 'usb',
+        icon: 'list',
         routes: [
           {
             path: '/catalogo/proveedores/list',
@@ -201,7 +201,7 @@ const menus = [
         path: '/catalogo/ventas',
         title: 'ventas!',
         replace: '/catalogo/ventas/list',
-        icon: 'usb',
+        icon: 'shopping-cart',
         routes: [
           {
             path: '/catalogo/ventas/list',
@@ -222,7 +222,7 @@ const menus = [
         path: '/catalogo/clientes',
         title: 'clientes',
         replace: '/catalogo/clientes/list',
-        icon: 'usb',
+        icon: 'id-card-o',
         routes: [
           {
             path: '/catalogo/clientes/list',
@@ -244,7 +244,7 @@ const menus = [
         path: '/catalogo/autors',
         title: 'autors!',
         replace: '/catalogo/autors/list',
-        icon: 'qq',
+        icon: 'list',
         routes: [
           {
             path: '/catalogo/autors/list',

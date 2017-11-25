@@ -67,7 +67,7 @@ class List extends Component {
                 >
                     {'Agregar'}
                 </Button>
-            <Card>
+            <Card> 
                 <CardContent>
                 
 
