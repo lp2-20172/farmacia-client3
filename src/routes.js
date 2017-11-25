@@ -27,12 +27,19 @@ import { RouteWithSubRoutes } from './node_m/react-router-dom-ext'
 
 const Home = () => (
   <div>
-    <h2>Home</h2>
+    <h2>Que ahy de nuevo</h2>
   </div>
 )
 const Sandwiches = () => <h2>Sandwiches</h2>
 
 const Tacos = ({ routes }) => (
+  <div>
+    {routes.map((route, i) => (
+      <RouteWithSubRoutes key={i} {...route} />
+    ))}
+  </div>
+)
+const Compras = ({ routes }) => (
   <div>
     {routes.map((route, i) => (
       <RouteWithSubRoutes key={i} {...route} />
@@ -124,7 +131,7 @@ const routes = [
       {
         path: '/catalogo/compras',
         //title: 'categorias!',
-        component: Tacos,
+        component: Compras,
         routes: [
           {
             path: '/catalogo/compras/list',

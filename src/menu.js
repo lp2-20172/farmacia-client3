@@ -94,21 +94,21 @@ const menus = [
       },
       {
         path: '/catalogo/compras',
-        title: 'compras!',
+        title: 'Compras',
         replace: '/catalogo/compras/list',
-        icon: 'usb',
+        icon: 'account_balance_wallet',
         routes: [
           {
             path: '/catalogo/compras/list',
-            title: 'list cat!',
+            title: 'lista compras',
           },
           {
             path: '/catalogo/compras/new',
-            title: 'new cat!',
+            title: 'nueva compra',
           },
           {
             path: '/catalogo/compras/edit/:id',
-            title: 'edit cat!',
+            title: 'editar compra',
           }
         ]
 
