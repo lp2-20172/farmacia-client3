@@ -17,6 +17,8 @@ import AlmacenList  from './components/almacenes/List'
 import AlmacenForm  from './components/almacenes/Form'
 import ProveedorList  from './components/proveedores/List'
 import ProveedorForm  from './components/proveedores/Form'
+import ClienteList  from './components/clientes/List'
+import ClienteForm  from './components/clientes/Form'
 
 import { RouteWithSubRoutes } from './node_m/react-router-dom-ext'
 
@@ -40,6 +42,13 @@ const Tacos = ({ routes }) => (
   </div>
 )
 const Compras = ({ routes }) => (
+  <div>
+    {routes.map((route, i) => (
+      <RouteWithSubRoutes key={i} {...route} />
+    ))}
+  </div>
+)
+const Clientes = ({ routes }) => (
   <div>
     {routes.map((route, i) => (
       <RouteWithSubRoutes key={i} {...route} />
@@ -239,6 +248,29 @@ const routes = [
             path: '/catalogo/ventas/edit/:id',
             //title: 'edit cat!',
             component: VentaForm
+          },
+          
+        ]
+      },
+      {
+        path: '/catalogo/clientes',
+        //title: 'clientes',
+        component: Clientes,
+        routes: [
+          {
+            path: '/catalogo/clientes/list',
+            //title: 'list cliente',
+            component: ClienteList
+          },
+          {
+            path: '/catalogo/clientes/new',
+            //title: 'new cliente',
+            component: ClienteForm
+          },
+          {
+            path: '/catalogo/clientes/edit/:id',
+            //title: 'edit cat!',
+            component: ClienteForm
           },
           
         ]

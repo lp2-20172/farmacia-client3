@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getList, del } from '../../actions/almacen-action'
+import { getList, del } from '../../actions/cliente-action'
 import DeleteIcon from 'material-ui-icons/Delete';
 import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
@@ -62,7 +62,7 @@ class List extends Component {
                     icon={{name: 'search'}}
                     component={Link}
                     raised
-                    to="/catalogo/almacenes/new"
+                    to="/catalogo/clientes/new"
                     raised color="accent"
                 >
                     {'Agregar'}
@@ -78,8 +78,8 @@ class List extends Component {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>#</TableCell>
+                                    <TableCell >Ruc</TableCell>
                                     <TableCell >Nombre</TableCell>
-                                    <TableCell >Direccion</TableCell>
                                     <TableCell >Opciones</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -88,10 +88,10 @@ class List extends Component {
                                 {list.map((d, index) =>
                                     <TableRow key={index}>
                                         <TableCell numeric>{index + 1}</TableCell>
-                                        <TableCell >{d.nombre}</TableCell>
-                                        <TableCell >{d.direccion}</TableCell>
+                                        <TableCell >{d.ruc}</TableCell>
+                                        <TableCell >{d.person}</TableCell>
                                         <TableCell >
-                                        <Link to={`/catalogo/almacenes/edit/${d.id}`}>
+                                        <Link to={`/catalogo/clientes/edit/${d.id}`}>
                                     <Button  aria-label="edit">
                                         <ModeEditIcon />
                                     </Button>
@@ -117,7 +117,7 @@ List.propTypes = {
     list: PropTypes.array
 }
 const mapStateToProps = (state) => {
-    return { list: state.almacen.list }
+    return { list: state.cliente.list }
 }
 export default connect(mapStateToProps, {
     getList,

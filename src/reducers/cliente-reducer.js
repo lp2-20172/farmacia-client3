@@ -1,10 +1,10 @@
 import {
-    ALMACEN_LIST,
-    ALMACEN_LIST_FAILURE,
-    ALMACEN_ADD, ALMACEN_UPDATE,
-    ALMACEN_DELETE
-} from '../actions/almacen-action'
-//import { CATEGORIA_FETCH,  } from '../actions/categoria-action'
+    CLIENTE_LIST,
+    CLIENTE_LIST_FAILURE,
+    CLIENTE_ADD, CLIENTE_UPDATE,
+    CLIENTE_DELETE
+} from '../actions/cliente-action'
+//import { CLIENTE_FETCH,  } from '../actions/cliente-action'
 
 const initialState = {
     list: [],
@@ -12,20 +12,20 @@ const initialState = {
     error: null
 }
 
-const almacenReducer = (state = initialState, action) => {
+const clienteReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ALMACEN_LIST:
+        case CLIENTE_LIST:
             return {
                 ...state,
                 list: action.list,
                 error: null
             }
-        case ALMACEN_LIST_FAILURE: return {
+        case CLIENTE_LIST_FAILURE: return {
             ...state,
             list: [],
             error: action.error,
         }
-        case ALMACEN_ADD:
+        case CLIENTE_ADD:
             return {
                 ...state,
             }
@@ -35,11 +35,11 @@ const almacenReducer = (state = initialState, action) => {
             ...state,
             data: action.data
         }*/
-        case ALMACEN_UPDATE:
+        case CLIENTE_UPDATE:
             return {
                 ...state,
             }
-        case ALMACEN_DELETE:
+        case CLIENTE_DELETE:
             const id = action.data
             return {
                 ...state,
@@ -49,4 +49,4 @@ const almacenReducer = (state = initialState, action) => {
             return state;
     }
 }
-export default almacenReducer
+export default clienteReducer

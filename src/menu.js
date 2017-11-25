@@ -218,6 +218,27 @@ const menus = [
         ]
 
       },
+      {
+        path: '/catalogo/clientes',
+        title: 'clientes',
+        replace: '/catalogo/clientes/list',
+        icon: 'usb',
+        routes: [
+          {
+            path: '/catalogo/clientes/list',
+            title: 'Lista clientes',
+          },
+          {
+            path: '/catalogo/clientes/new',
+            title: 'Nuevo Cliente',
+          },
+          {
+            path: '/catalogo/clientes/edit/:id',
+            title: 'Editar Cliente',
+          }
+        ]
+
+      },
 
       {
         path: '/catalogo/autors',
@@ -234,7 +255,8 @@ const menus = [
             title: 'new autors2',
           }
         ]
-      }
+      },
+      
     ]
   }
 ]
