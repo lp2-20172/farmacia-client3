@@ -44,7 +44,7 @@ class SidebarExample extends React.Component {
         <div style={{ flex: 1, padding: '10px' }}>
           <title>
             {title.parent ? title.parent + (title.children ? ' - ' : '') + title.children : title.children}
-            Farmacia
+             Farmacia
               </title>
           <h2 >
             {title.parent ? title.parent + (title.children ? ' - ' : '') + title.children : title.children}

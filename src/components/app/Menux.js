@@ -33,13 +33,12 @@ class NestedList extends React.Component {
     const { classes } = this.props;
 
     return (
-      <List className={classes.root} subheader={<ListSubheader>______________________</ListSubheader>}>
+      <List className={classes.root} subheader={<ListSubheader>Complement</ListSubheader>}>
         <ListItem button>
           <ListItemIcon>
             <SendIcon />
           </ListItemIcon>
-          <ListItemText inset primary="Sent mail" />
-          <input type="password" Placeholder="invaliable"/>
+          <ListItemText inset primary="Envios " />
         </ListItem>
         <ListItem button>
           <ListItemIcon>

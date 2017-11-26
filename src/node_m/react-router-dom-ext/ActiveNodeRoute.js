@@ -13,7 +13,7 @@ const findActiveNodeRoute = (currentPages, url, countParent = 0, title = { "pare
             if (mp) {
 
                 if (title.parent) {
-                    title.parent = title.parent + ' > ' + pageToTitle(page)
+                    title.parent = title.parent + ' - ' + pageToTitle(page)
                 } else {
                     title.parent = pageToTitle(page)
                 }

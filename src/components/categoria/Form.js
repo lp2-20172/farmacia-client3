@@ -76,6 +76,7 @@ class Form extends Component {
                         margin="normal"
                     /> 
                 <form onSubmit={this.handleSubmit}>
+                <input type="file" />d
 
                     <input type="submit" value="Guardar Cambios" />
                 </form>

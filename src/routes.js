@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 //import loadable from 'loadable-components';
 
 import CategoriaList from './components/categoria/List'

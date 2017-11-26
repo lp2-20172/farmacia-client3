@@ -78,8 +78,7 @@ export const CATEGORIA_FETCH = "CATEGORIA_FETCH"
 export const categoriaFetch = (data) => (
     {
         type: CATEGORIA_FETCH,
-        data
-    }
+        dALMACEN
 )
 export const getByIdx = (id) => {
     return (dispatch) => {
