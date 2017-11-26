@@ -47,7 +47,7 @@ class List extends Component {
         }
         return (
             <div>
-            <h2>Almacen List</h2>
+            <h2>Lista Almacen</h2>
             <label>
             <TextField
             id="search"
@@ -57,7 +57,8 @@ class List extends Component {
             onChange={this.handleInputChange}
             name="q"
             margin="normal"
-            /></label><tr></tr>
+            /></label>
+            _______________________________________________________________________________________
             <Button
                     icon={{name: 'search'}}
                     component={Link}
@@ -65,7 +66,7 @@ class List extends Component {
                     to="/catalogo/almacenes/new"
                     raised color="accent"
                 >
-                    {'Agregar'}
+                    <strong>{'+ Agregar'}</strong>
                 </Button>
             <Card> 
                 <CardContent>

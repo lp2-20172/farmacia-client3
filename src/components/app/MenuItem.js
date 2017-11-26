@@ -90,7 +90,7 @@ class MenuItem extends React.Component<any, any> {
                     className={match ? (isChildren ? classes.navToggleLinkActive : classes.navLinkActive) : (isChildren ? classes.navToggleLink : classes.navLink)}
                   ><i className={`fa fa-${icon}`}> </i>
                   
-                    {match ? '> ' : ''}
+                    {match ? ' - ' : ''}
                     
                     <ListItemText inset primary={title} />
 

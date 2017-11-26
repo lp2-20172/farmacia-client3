@@ -93,11 +93,11 @@ class PersistentDrawer extends React.Component {
                 <MenuIcon />
               </IconButton>
               <Typography type="title" color="inherit" noWrap>
-                {title.parent ? title.parent + (title.children ? ' > ' : '') + title.children : title.children}
+                {title.parent ? title.parent + (title.children ? ' - ' : '') + title.children : title.children}
               </Typography>
               <title>
-                {title.parent ? title.parent + (title.children ? ' > ' : '') + title.children : title.children}
-                - Farmacia
+                {title.parent ? title.parent + (title.children ? ' - ' : '') + title.children : title.children}
+                 - Farmacia
               </title>
               <div className={classes.grow} />
               <IconButton

@@ -2,6 +2,16 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getList, del } from '../../actions/proveedor-action'
+import DeleteIcon from 'material-ui-icons/Delete';
+import IconButton from 'material-ui/IconButton';
+import TextField from 'material-ui/TextField';
+import ModeEditIcon from 'material-ui-icons/ModeEdit';
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Typography from 'material-ui/Typography'
+import Paper from 'material-ui/Paper';
+import Card, { CardHeader, CardContent } from 'material-ui/Card'
+import Button from 'material-ui/Button';
+import AddIcon from 'material-ui-icons/Add';
 import {
     Link
 } from 'react-router-dom'
@@ -37,35 +47,74 @@ class List extends Component {
         }
         return (
             <div>
-                <h2>Categoria List</h2>
-                <label>Buscar:
-            <input type="text"
-                        value={this.state.q}
-                        onChange={this.handleInputChange}
-                        name="q" />
-                </label>
-                <Link to="/catalogo/proveedores/new">New Proveedor</Link>
-                <table>
-                    <tbody>
-                        {list.map((d, i) => (
-                            <tr key={i}>
-                                <td>{i + 1}</td>
-                                <td> {d.codigo} - {d.nombre}</td>
-                                <td><Link to={`/catalogo/proveedores/edit/${d.id}`}>Edit</Link>
-                                </td>
-                                <td>
-                                    <button onClick={() => del(d.id)} > X </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+            <h2>Almacen List</h2>
+            <label>
+            <TextField
+            id="search"
+            label="Buscar"
+            type="search" 
+            value={this.state.q}
+            onChange={this.handleInputChange}
+            name="q"
+            margin="normal"
+            /></label><tr></tr>
+            <Button
+                    icon={{name: 'search'}}
+                    component={Link}
+                    raised
+                    to="/catalogo/proveedores/new"
+                    raised color="accent"
+                >
+                    {'Agregar'}
+                </Button>
+            <Card> 
+                <CardContent>
+                
+
+                    <Paper style={{
+                        overflowX: 'auto',
+                    }}>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>#</TableCell>
+                                    <TableCell >Nombre Empresa</TableCell>
+                                    <TableCell >N° de Ruc</TableCell>
+                                    <TableCell >Opciones</TableCell>
+                                </TableRow>
+                            </TableHead>
+
+                            <TableBody>
+                                {list.map((d, index) =>
+                                    <TableRow key={index}>
+                                        <TableCell numeric>{index + 1}</TableCell>
+                                        <TableCell >{d.empresa}</TableCell>
+                                        <TableCell >{d.ruc}</TableCell>
+                                        <TableCell >
+                                        <Link to={`/catalogo/proveedores/edit/${d.id}`}>
+                                    <Button  aria-label="edit">
+                                        <ModeEditIcon />
+                                    </Button>
+                                </Link>
+                                        
+                                <IconButton onClick={() => del(d.id)}  aria-label="Delete">
+                                <DeleteIcon/>
+                                </IconButton>
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+                            </TableBody>
+                        </Table>
+                    </Paper>
+                </CardContent>
+
+            </Card>
             </div>
         )
     }
 }
 List.propTypes = {
-    list: PropTypes.arrayR
+    list: PropTypes.array
 }
 const mapStateToProps = (state) => {
     return { list: state.proveedor.list }

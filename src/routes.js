@@ -291,25 +291,19 @@ export { routes }
 import {
   Route,
   Redirect
-
 } from 'react-router-dom'
 class Tacos2x extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       redirect: false,
     }
     props.history.push(props.routes[0].path)
-
   }
   componentWillMount = () => {
-
    // this.props.history.push('/categorias/list/list')
-
   }
   componentDidMount = () => {
-
     this.setState({
       redirect: true,
     })
@@ -319,7 +313,6 @@ class Tacos2x extends React.Component {
       this.props.history.push(this.props.routes[0].path)
     }
   }
-
   render() {
     //console.log(JSON.stringify(this.props))
     const { routes, history } = this.props
@@ -346,16 +339,13 @@ class Tacos2x extends React.Component {
     )
     
   }
-
 }
-
 const Tacos2p = ({ routes }) => (
   <div>
     {routes.map((route, i) => (
       <RouteWithSubRoutes key={i} {...route} />
     ))}
     
-
   </div>
 )
 */

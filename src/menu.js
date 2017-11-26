@@ -159,7 +159,7 @@ const menus = [
         path: '/catalogo/productos',
         title: 'productos!',
         replace: '/catalogo/productos/list',
-        icon: 'list',
+        icon: 'product-hunt',
         routes: [
           {
             path: '/catalogo/productos/list',
@@ -180,7 +180,7 @@ const menus = [
         path: '/catalogo/proveedores',
         title: 'proveedores!',
         replace: '/catalogo/proveedores/list',
-        icon: 'list',
+        icon: 'truck',
         routes: [
           {
             path: '/catalogo/proveedores/list',
@@ -222,7 +222,7 @@ const menus = [
         path: '/catalogo/clientes',
         title: 'clientes',
         replace: '/catalogo/clientes/list',
-        icon: 'id-card-o',
+        icon: 'users',
         routes: [
           {
             path: '/catalogo/clientes/list',

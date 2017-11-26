@@ -74,19 +74,18 @@ export const getById = (id) => {
     }
 }
 /*
-export const CATEGORIA_FETCH = "CATEGORIA_FETCH"
-export const categoriaFetch = (data) => (
+export const PROVEEDOR_FETCH = "PROVEEDOR_FETCH"
+export const proveedorFetch = (data) => (
     {
-        type: CATEGORIA_FETCH,
-        data
-    }
+        type: PROVEEDOR_FETCH,
+        dALMACEN
 )
 export const getByIdx = (id) => {
     return (dispatch) => {
         return new Promise((resolve, reject) => {
             try {
                 client.get(`${url}${id}`).then(r => {
-                    dispatch(categoriaFetch(r.data))
+                    dispatch(proveedorFetch(r.data))
                     resolve(r)
                 })
             } catch (err) {

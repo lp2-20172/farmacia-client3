@@ -4,7 +4,7 @@ import {
     COMPRA_ADD, COMPRA_UPDATE,
     COMPRA_DELETE
 } from '../actions/compra-action'
-//import { CATEGORIA_FETCH,  } from '../actions/categoria-action'
+//import { CATEGORIA_FETCH,  } from '../actions/compra-action'
 
 const initialState = {
     list: [],
@@ -30,7 +30,7 @@ const compraReducer = (state = initialState, action) => {
                 ...state,
             }
         /*
-    case CATEGORIA_FETCH:
+    case COMPRA_FETCH:
         return {
             ...state,
             data: action.data

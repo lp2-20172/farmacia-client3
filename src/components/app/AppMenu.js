@@ -62,7 +62,7 @@ const styles = theme => ({
     },
     navToggleLinkActive: {
         paddingLeft: theme.spacing.unit * 4,
-        background: '#9E9E9E;',
+        background: '#d1d1d1',
         color: theme.palette.text.primary,
 
     },
@@ -72,7 +72,7 @@ const styles = theme => ({
     },
     navLinkActive: {
         paddingLeft: theme.spacing.unit * 2,
-        background: '#9E9E9E;',
+        background: '#d1d1d1;',
         color: theme.palette.text.primary,
 
 

@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Button from 'material-ui/Button';    
+import TextField from 'material-ui/TextField';
+import { FormGroup, FormControlLabel } from 'material-ui/Form';
+import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import Card, { CardHeader, CardContent } from 'material-ui/Card'
 import Avatar from 'material-ui/Avatar'
+import Dialog from 'material-ui/Dialog';
 //import Typography from 'material-ui/Typography'
 //import TextField from 'material-ui/TextField';
 
 import { save, getById, update } from '../../actions/producto-action'
 import { connect } from 'react-redux'
+
 
 class Form extends Component {
     /*
@@ -24,10 +30,14 @@ class Form extends Component {
         super(props);
         this.state = {
             id: props.data ? props.data.id : null,
-            codigo: props.data ? props.data.codigo : '',
             nombre: props.data ? props.data.nombre : '',
-            unidadMed: props.data ? props.data.unidadMed : '',
-            almacen: props.data ? props.data.almacen : ''
+            codigo: props.data ? props.data.codigo : '',
+            detalle: props.data ? props.data.detalle : '',
+            fechaVen: props.data ? props.data.fechaVen : '',
+            precio_venta: props.data ? props.data.precio_venta : '',
+            unidad_med: props.data ? props.data.unidad_med : '',
+            almacen: props.data ? props.data.almacen : '',
+            categoria: props.data ? props.data.categoria : ''
         }
     }
     /*
@@ -69,11 +79,14 @@ class Form extends Component {
             this.props.getById(id).then(data => {
                 this.setState({
                     id: data.id,
-                    codigo: data.codigo,
                     nombre: data.nombre,
-                    precioVenta : data.precioVenta,
-                    unidadMed: data.unidadMed,
-                    almacen: data.almacen
+                    codigo: data.codigo,
+                    detalle : data.detalle,
+                    fechaVen: data.fechaVen,
+                    precio_venta: data.precio_venta,
+                    unidad_med: data.unidad_med,
+                    almacen: data.almacen,
+                    categoria: data.categoria
                 });
             });
         }
@@ -102,58 +115,62 @@ class Form extends Component {
         event.preventDefault();
     }
 
+    handleOpen = () => {
+        this.setState({open: true});
+      }
+   
     render() {
         //const { data } = this.props
         return (
-            <Card>
-                <CardHeader
-                    avatar={
-                        <Avatar aria-label="Recipe" >
-                            R
-                          </Avatar>
-                    }
-                    title="User Form"
-                    subheader="Users Form"
-                />
-                <CardContent>
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            Codigo:
-                            <input type="text" name="codigo" value={this.state.codigo} onChange={this.handleChange} />
-                        </label>
-                        <br />
-
-                        <label>
-                            Name:
-                            <input type="text" name="nombre" value={this.state.nombre} onChange={this.handleChange} />
-                        </label>
-                        <label>
-                            FechaVen:
-                            <input type="text" name="fechaVen" value={this.state.fechaVen} onChange={this.handleChange} />
-                        </label>
-                        <label>
-                            UnidadMed:
-                            <input type="text" name="unidadMed" value={this.state.unidadMed} onChange={this.handleChange} />
-                        </label>
-                        <br />
-                        <label>
-                            PrecioVenta:
-                            <input type="text" name="precioVenta" value={this.state.precioVenta} onChange={this.handleChange} />
-                        </label>             
-                        <br />
-                        <label>
-                            Almacen:
-                            <input type="text" name="almacen" value={this.state.almacen} onChange={this.handleChange} />
-                        </label>
-                        <br />
-                        <label>
-                            Categoria:
-                            <input type="text" name="categoria" value={this.state.categoria} onChange={this.handleChange} />
-                        </label>
-                        <input type="submit" value="Submit" />
-                    </form>
-                </CardContent>
-            </Card>
+        <div>
+            <TextField
+                value={this.state.nombre}
+                onChange={this.handleInputChange}
+                name="nombre"
+                label="Nombre Producto"
+                placeholder="Nombre"
+                multiline
+                margin="normal"
+            />
+            <br></br>
+            <TextField
+                value={this.state.codigo}
+                onChange={this.handleInputChange}
+                name="codigo"
+                label="Codigo de Producto"
+                placeholder="codigo"
+                multiline
+                margin="normal"
+            />
+            <br></br>
+            <TextField
+                value={this.state.detalle}
+                onChange={this.handleInputChange}
+                name="detalle"
+                label="Detalle"
+                placeholder="detalle"
+                multiline
+                margin="normal"
+            />
+            <br></br>
+                <TextField
+                value={this.state.fechaVen}
+                onChange={this.handleInputChange}
+                name="fechaVen"
+                label="Detalle"
+                placeholder="fechaVen"
+                multiline
+                margin="normal"
+            />
+        
+            
+            <form onSubmit={this.handleSubmit}>
+                <Button type="submit" raised color="primary">
+                    Guardar
+                </Button>
+            </form>
+            
+        </div>
         )
     }
 }
