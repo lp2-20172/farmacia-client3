@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 //import loadable from 'loadable-components';
 
 import CategoriaList from './components/categoria/List'
@@ -28,13 +29,10 @@ import { RouteWithSubRoutes } from './node_m/react-router-dom-ext'
 
 
 
-
+const styles = { color: 'white', backgroundColor: 'blue' }
 const Home = () => (
-  <div>
-    <h2>____________________________
-      ____________________________
-      ____________________________
-      ____________________________
+  <div style={styles}> 
+    <h2>s
     </h2>
   </div>
 )
@@ -101,50 +99,40 @@ const routes = [
   },
   {
     path: '/catalogo',
-    //title: 'catalogo!',
     component: Tacos,
     routes: [
       {
         path: '/catalogo/categorias',
-        //title: 'categorias!',
         component: Tacos,
         routes: [
           {
             path: '/catalogo/categorias/list',
-            //title: 'list cat!',
             component: CategoriaList
           },
           {
             path: '/catalogo/categorias/new',
-            //title: 'new cat!',
             component: CategoriaForm
           },
           {
             path: '/catalogo/categorias/edit/:id',
-            //title: 'edit cat!',
             component: CategoriaForm
           },
-
         ]
       },
       {
         path: '/catalogo/almacenes',
-        //title: 'categorias!',
         component: Tacos,
         routes: [
           {
             path: '/catalogo/almacenes/list',
-            //title: 'list cat!',
             component: AlmacenList
           },
           {
             path: '/catalogo/almacenes/new',
-            //title: 'new cat!',
             component: AlmacenForm
           },
           {
             path: '/catalogo/almacenes/edit/:id',
-            //title: 'edit cat!',
             component: AlmacenForm
           },
           
@@ -152,22 +140,18 @@ const routes = [
       },
       {
         path: '/catalogo/compras',
-        //title: 'categorias!',
         component: Compras,
         routes: [
           {
             path: '/catalogo/compras/list',
-            //title: 'list cat!',
             component: CompraList
           },
           {
             path: '/catalogo/compras/new',
-            //title: 'new cat!',
             component: CompraForm
           },
           {
             path: '/catalogo/compras/edit/:id',
-            //title: 'edit cat!',
             component: CompraForm
           },
           
@@ -175,22 +159,18 @@ const routes = [
       },
       {
         path: '/catalogo/detalleCompras',
-        //title: 'categorias!',
         component: Tacos,
         routes: [
           {
             path: '/catalogo/detalleCompras/list',
-            //title: 'list cat!',
             component: DetalleCompraList
           },
           {
             path: '/catalogo/detalleCompras/new',
-            //title: 'new cat!',
             component: DetalleCompraForm
           },
           {
             path: '/catalogo/detalleCompras/edit/:id',
-            //title: 'edit cat!',
             component: DetalleCompraForm
           },
           
@@ -198,22 +178,18 @@ const routes = [
       },
       {
         path: '/catalogo/productos',
-        //title: 'categorias!',
         component: Tacos,
         routes: [
           {
             path: '/catalogo/productos/list',
-            //title: 'list cat!',
             component: ProductoList
           },
           {
             path: '/catalogo/productos/new',
-            //title: 'new cat!',
             component: ProductoForm
           },
           {
             path: '/catalogo/productos/edit/:id',
-            //title: 'edit cat!',
             component: ProductoForm
           },
           
@@ -221,22 +197,18 @@ const routes = [
       },
       {
         path: '/catalogo/proveedores',
-        //title: 'categorias!',
         component: Tacos,
         routes: [
           {
             path: '/catalogo/proveedores/list',
-            //title: 'list cat!',
             component: ProveedorList
           },
           {
             path: '/catalogo/proveedores/new',
-            //title: 'new cat!',
             component: ProveedorForm
           },
           {
             path: '/catalogo/proveedores/edit/:id',
-            //title: 'edit cat!',
             component: ProveedorForm
           },
           
@@ -244,22 +216,18 @@ const routes = [
       },
       {
         path: '/catalogo/ventas',
-        //title: 'categorias!',
         component: Tacos,
         routes: [
           {
             path: '/catalogo/ventas/list',
-            //title: 'list cat!',
             component: VentaList
           },
           {
             path: '/catalogo/ventas/new',
-            //title: 'new cat!',
             component: VentaForm
           },
           {
             path: '/catalogo/ventas/edit/:id',
-            //title: 'edit cat!',
             component: VentaForm
           },
           
@@ -267,22 +235,18 @@ const routes = [
       },
       {
         path: '/catalogo/clientes',
-        //title: 'clientes',
         component: Clientes,
         routes: [
           {
             path: '/catalogo/clientes/list',
-            //title: 'list cliente',
             component: ClienteList
           },
           {
             path: '/catalogo/clientes/new',
-            //title: 'new cliente',
             component: ClienteForm
           },
           {
             path: '/catalogo/clientes/edit/:id',
-            //title: 'edit cat!',
             component: ClienteForm
           },
           
@@ -316,72 +280,3 @@ const routes = [
 ]
 
 export { routes }
-
-
-
-
-
-
-/*
-//import { Redirect } from 'react-router'
-import {
-  Route,
-  Redirect
-} from 'react-router-dom'
-class Tacos2x extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      redirect: false,
-    }
-    props.history.push(props.routes[0].path)
-  }
-  componentWillMount = () => {
-   // this.props.history.push('/categorias/list/list')
-  }
-  componentDidMount = () => {
-    this.setState({
-      redirect: true,
-    })
-  }
-  handleClick = () => {
-    if (this.state.redirect) {
-      this.props.history.push(this.props.routes[0].path)
-    }
-  }
-  render() {
-    //console.log(JSON.stringify(this.props))
-    const { routes, history } = this.props
-    //console.log(JSON.stringify(routes[0].path))
-    //history.push('/categorias/list/list');
-    //console.log(JSON.stringify(this.state.redirect))
-    
-       // if (this.state.redirect) {
-    
-         // this.props.history.push('/categorias/list/list')
-    
-        //} 
-    
-    return (
-      <div>
-        {routes.map((route, i) => (
-          <RouteWithSubRoutes key={i} {...route} />
-        ))}
-        
-        <button onClick={this.handleClick}>
-                        Volver
-                    </button>
-      </div>
-    )
-    
-  }
-}
-const Tacos2p = ({ routes }) => (
-  <div>
-    {routes.map((route, i) => (
-      <RouteWithSubRoutes key={i} {...route} />
-    ))}
-    
-  </div>
-)
-*/

@@ -2,27 +2,27 @@
 const menus = [
   {
     path: '/home',
-    title: 'Home!',
+    title: 'Home',
     icon: 'telegram',
   },
   {
     path: '/sandwiches',
-    title: 'sandwiches!',
+    title: 'Servicios',
     icon: 'fa',
   },
   {
     path: '/tacos',
-    title: 'tacos!',
+    title: 'Usuarios',
     icon: 'list',
     routes: [
       {
         path: '/tacos/bus',
-        title: 'bus!',
+        title: 'Example',
         icon: 'list',
       },
       {
         path: '/tacos/cart',
-        title: 'cart!',
+        title: 'Example',
         icon: 'yelp',
       }
     ]
@@ -30,17 +30,17 @@ const menus = [
   
   {
     path: '/xtacos2',
-    title: 'tacos2!',
+    title: 'tacos2',
     icon: 'list',
     routes: [
       {
         path: '/xtacos2/bus2',
-        title: 'bus2!',
+        title: 'Example',
         icon: 'gg',
       },
       {
         path: '/xtacos2/cart2',
-        title: 'cart2!',
+        title: 'Example',
         icon: 'send',
       }
     ]
@@ -48,46 +48,46 @@ const menus = [
   {
     path: '/catalogo',
     title: 'Catalogo',
-    icon: 'dns',
+    icon: '',
     routes: [
       {
         path: '/catalogo/categorias',
-        title: 'categorias!',
+        title: 'Categorias',
         replace: '/catalogo/categorias/list',
         icon: 'navicon',
         routes: [
           {
             path: '/catalogo/categorias/list',
-            title: 'list cat!',
+            title: 'List',
           },
           {
             path: '/catalogo/categorias/new',
-            title: 'new cat!',
+            title: 'New',
           },
           {
             path: '/catalogo/categorias/edit/:id',
-            title: 'edit cat!',
+            title: 'Edit',
           }
         ]
 
       },
        {
         path: '/catalogo/almacenes',
-        title: 'almacenes!',
+        title: 'Almacen',
         replace: '/catalogo/almacenes/list',
         icon: 'adn',
         routes: [
           {
             path: '/catalogo/almacenes/list',
-            title: 'list cat!',
+            title: 'List',
           },
           {
             path: '/catalogo/almacenes/new',
-            title: 'new cat!',
+            title: 'New',
           },
           {
             path: '/catalogo/almacenes/edit/:id',
-            title: 'edit cat!',
+            title: 'Edit',
           }
         ]
 
@@ -100,99 +100,99 @@ const menus = [
         routes: [
           {
             path: '/catalogo/compras/list',
-            title: 'lista compras',
+            title: 'List',
           },
           {
             path: '/catalogo/compras/new',
-            title: 'nueva compra',
+            title: 'New',
           },
           {
             path: '/catalogo/compras/edit/:id',
-            title: 'editar compra',
+            title: 'Edit',
           }
         ]
 
       },
       {
         path: '/catalogo/detalleCompras',
-        title: 'detalleCompras!',
+        title: 'Detalle de Compra',
         replace: '/catalogo/detalleCompras/list',
         icon: 'shopping-bag',
         routes: [
           {
             path: '/catalogo/detalleCompras/list',
-            title: 'list cat!',
+            title: 'List',
           },
           {
             path: '/catalogo/detalleCompras/new',
-            title: 'new cat!',
+            title: 'New',
           },
           {
             path: '/catalogo/detalleCompras/edit/:id',
-            title: 'edit cat!',
+            title: 'Edit',
           }
         ]
 
       },
       {
         path: '/catalogo/detalleVentas',
-        title: 'detalleVentas!',
+        title: 'Detalle Ventas',
         replace: '/catalogo/detalleVentas/list',
         icon: 'cart-arrow-down',
         routes: [
           {
             path: '/catalogo/detalleVentas/list',
-            title: 'list cat!',
+            title: 'list',
           },
           {
             path: '/catalogo/detalleVentas/new',
-            title: 'new cat!',
+            title: 'nuevo',
           },
           {
             path: '/catalogo/detalleVentas/edit/:id',
-            title: 'edit cat!',
+            title: 'editando detalle venta',
           }
         ]
 
       },
        {
         path: '/catalogo/productos',
-        title: 'productos!',
+        title: 'Productos',
         replace: '/catalogo/productos/list',
         icon: 'product-hunt',
         routes: [
           {
             path: '/catalogo/productos/list',
-            title: 'list cat!',
+            title: 'lista productos',
           },
           {
             path: '/catalogo/productos/new',
-            title: 'new cat!',
+            title: 'nuevo producto',
           },
           {
             path: '/catalogo/productos/edit/:id',
-            title: 'edit cat!',
+            title: 'editar producto',
           }
         ]
 
       },
        {
         path: '/catalogo/proveedores',
-        title: 'proveedores!',
+        title: 'Proveedores',
         replace: '/catalogo/proveedores/list',
         icon: 'truck',
         routes: [
           {
             path: '/catalogo/proveedores/list',
-            title: 'list cat!',
+            title: 'lista proveedores',
           },
           {
             path: '/catalogo/proveedores/new',
-            title: 'new cat!',
+            title: 'nuevo proveedor',
           },
           {
             path: '/catalogo/proveedores/edit/:id',
-            title: 'edit cat!',
+            title: 'Editar Proveedor',
           }
         ]
 
@@ -205,15 +205,15 @@ const menus = [
         routes: [
           {
             path: '/catalogo/ventas/list',
-            title: 'list cat!',
+            title: 'List',
           },
           {
             path: '/catalogo/ventas/new',
-            title: 'new cat!',
+            title: 'New',
           },
           {
             path: '/catalogo/ventas/edit/:id',
-            title: 'edit cat!',
+            title: 'Edit',
           }
         ]
 
