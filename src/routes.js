@@ -19,6 +19,8 @@ import ProveedorList  from './components/proveedores/List'
 import ProveedorForm  from './components/proveedores/Form'
 import ClienteList  from './components/clientes/List'
 import ClienteForm  from './components/clientes/Form'
+import UnidadMedList  from './components/unidadMeds/List'
+import UnidadMedForm  from './components/unidadMeds/Form'
 
 import { RouteWithSubRoutes } from './node_m/react-router-dom-ext'
 
@@ -29,10 +31,14 @@ import { RouteWithSubRoutes } from './node_m/react-router-dom-ext'
 
 const Home = () => (
   <div>
-    <h2>Que ahy de nuevo</h2>
+    <h2>____________________________
+      ____________________________
+      ____________________________
+      ____________________________
+    </h2>
   </div>
 )
-const Sandwiches = () => <h2>Sandwiches</h2>
+const Sandwiches = () => <h2>Hellooo...!</h2>
 
 const Tacos = ({ routes }) => (
   <div>
@@ -49,6 +55,13 @@ const Compras = ({ routes }) => (
   </div>
 )
 const Clientes = ({ routes }) => (
+  <div>
+    {routes.map((route, i) => (
+      <RouteWithSubRoutes key={i} {...route} />
+    ))}
+  </div>
+)
+const UnidadMeds = ({ routes }) => (
   <div>
     {routes.map((route, i) => (
       <RouteWithSubRoutes key={i} {...route} />
@@ -275,6 +288,29 @@ const routes = [
           
         ]
       },
+      {
+        path: '/catalogo/unidadMeds',
+        
+        component: UnidadMeds,
+        routes: [
+          {
+            path: '/catalogo/unidadMeds/list',
+            
+            component: UnidadMedList
+          },
+          {
+            path: '/catalogo/unidadMeds/new',
+            
+            component: UnidadMedForm
+          },
+          {
+            path: '/catalogo/unidadMeds/edit/:id',
+            
+            component: UnidadMedForm
+          },
+          
+        ]
+      }
     ]
   }
 ]

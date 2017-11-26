@@ -9,6 +9,7 @@ import compra from './compra-reducer'
 import detalleVenta from './detalleVenta-reducer'
 import detalleCompra from './detalleCompra-reducer'
 import cliente from './cliente-reducer'
+import unidadMed from './unidadMed-reducer'
 import theme from './theme-reducer'
 
 let reducer = combineReducers({
@@ -22,6 +23,7 @@ let reducer = combineReducers({
     producto:producto,
     almacen:almacen,
     cliente:cliente,
+    unidadMed:unidadMed,
     
 })
 

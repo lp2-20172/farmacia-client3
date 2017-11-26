@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getList, del } from '../../actions/compra-action'
+import { getList, del } from '../../actions/unidadMed-action'
 import DeleteIcon from 'material-ui-icons/Delete';
 import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
@@ -47,27 +47,28 @@ class List extends Component {
         }
         return (
             <div>
-            <h2>Lista de Compras</h2>
+            <h2>Lista Almacen</h2>
             <label>
             <TextField
-            id="search"
-            label="Buscar"
-            type="search" 
-            value={this.state.q}
-            onChange={this.handleInputChange}
-            name="q"
-            margin="normal"
-            /></label><tr></tr>
+                id="search"
+                label="Buscar"
+                type="search" 
+                value={this.state.q}
+                onChange={this.handleInputChange}
+                name="q"
+                margin="normal"
+            /></label>
+
             <Button
                     icon={{name: 'search'}}
                     component={Link}
                     raised
-                    to="/catalogo/compras/new"
+                    to="/catalogo/unidadMeds/new"
                     raised color="accent"
-                >
-                    {'Agregar'}
-                </Button>
-            <Card>
+                    >   
+                    <strong>{'+ Agregar'}</strong>
+            </Button>
+            <Card> 
                 <CardContent>
                 
 
@@ -78,11 +79,8 @@ class List extends Component {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>#</TableCell>
-                                    <TableCell >Numero Documento</TableCell>
-                                    <TableCell >Precio Total</TableCell>
-                                    <TableCell >Proveedor</TableCell>
-                                    <TableCell >Almacen</TableCell>
-                                    <TableCell >Comprador</TableCell>
+                                    <TableCell >Codigo Unidad Medida</TableCell>
+                                    <TableCell >Nombre</TableCell>
                                     <TableCell >Opciones</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -91,13 +89,10 @@ class List extends Component {
                                 {list.map((d, index) =>
                                     <TableRow key={index}>
                                         <TableCell numeric>{index + 1}</TableCell>
-                                        <TableCell >{d.nro_doc}</TableCell>
-                                        <TableCell >{d.precio_total}</TableCell>
-                                        <TableCell >{d.proveedor}</TableCell>
-                                        <TableCell >{d.almacen}</TableCell>
-                                        <TableCell >{d.comprador}</TableCell>
+                                        <TableCell >{d.codigo}</TableCell>
+                                        <TableCell >{d.nombre}</TableCell>
                                         <TableCell >
-                                        <Link to={`/catalogo/compras/edit/${d.id}`}>
+                                        <Link to={`/catalogo/unidadMeds/edit/${d.id}`}>
                                     <Button  aria-label="edit">
                                         <ModeEditIcon />
                                     </Button>
@@ -123,7 +118,7 @@ List.propTypes = {
     list: PropTypes.array
 }
 const mapStateToProps = (state) => {
-    return { list: state.compra.list }
+    return { list: state.unidadMed.list }
 }
 export default connect(mapStateToProps, {
     getList,

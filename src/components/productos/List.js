@@ -58,7 +58,6 @@ class List extends Component {
             name="q"
             margin="normal"
             /></label>
-            _______________________________________________________________________________________
             <Button
                     icon={{name: 'search'}}
                     component={Link}
@@ -83,6 +82,7 @@ class List extends Component {
                                     <TableCell >Codigo</TableCell>
                                     <TableCell >Detalle</TableCell>
                                     <TableCell >Fecha de Venta</TableCell>
+                                    <TableCell >Precio Venta </TableCell>
                                     <TableCell >Unidad de Medida</TableCell>
                                     <TableCell >Almacen</TableCell>
                                     <TableCell >Categoria</TableCell>

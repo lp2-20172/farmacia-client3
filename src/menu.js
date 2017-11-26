@@ -239,6 +239,27 @@ const menus = [
         ]
 
       },
+      {
+        path: '/catalogo/unidadMeds',
+        title: 'Unidad Medida',
+        replace: '/catalogo/unidadMeds/list',
+        icon: 'cubes',
+        routes: [
+          {
+            path: '/catalogo/unidadMeds/list',
+            title: 'Lista de unidad de Medidas',
+          },
+          {
+            path: '/catalogo/unidadMeds/new',
+            title: 'Nuevo Unidad',
+          },
+          {
+            path: '/catalogo/unidadMeds/edit/:id',
+            title: 'Editar unidad',
+          }
+        ]
+
+      },
 
       {
         path: '/catalogo/autors',
