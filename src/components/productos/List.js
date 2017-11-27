@@ -46,13 +46,13 @@ class List extends Component {
             <h2>Lista Almacen</h2>
             <label>
             <TextField
-            id="search"
-            label="Buscar"
-            type="search" 
-            value={this.state.q}
-            onChange={this.handleInputChange}
-            name="q"
-            margin="normal"
+                id="search"
+                label="Buscar"
+                type="search" 
+                value={this.state.q}
+                onChange={this.handleInputChange}
+                name="q"
+                margin="normal"
             /></label>
             <Button
                     icon={{name: 'search'}}
@@ -64,8 +64,6 @@ class List extends Component {
                 </Button>
             <Card> 
                 <CardContent>
-                
-
                     <Paper style={{
                         overflowX: 'auto',
                     }}>
@@ -103,7 +101,6 @@ class List extends Component {
                                         <ModeEditIcon />
                                     </Button>
                                 </Link>
-                                        
                                 <IconButton onClick={() => del(d.id)}  aria-label="Delete">
                                 <DeleteIcon/>
                                 </IconButton>

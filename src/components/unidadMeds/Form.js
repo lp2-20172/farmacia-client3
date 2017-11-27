@@ -74,7 +74,7 @@ class Form extends Component {
             <div>
                 <center>
                 <TextField
-                value={this.state.nombre}
+                value={this.state.codigo}
                 onChange={this.handleInputChange}
                 name="codigo"
                 label="codigo Almacen"

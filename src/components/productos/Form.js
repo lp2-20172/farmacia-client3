@@ -109,7 +109,6 @@ class Form extends Component {
                 value={this.state.codigo}
                 onChange={this.handleInputChange}
                 name="codigo"
-                label="Codigo de Producto"
                 placeholder="codigo"
                 multiline
                 margin="normal"
@@ -119,7 +118,6 @@ class Form extends Component {
                 value={this.state.detalle}
                 onChange={this.handleInputChange}
                 name="detalle"
-                label="Detalle"
                 placeholder="detalle"
                 multiline
                 margin="normal"
@@ -129,7 +127,6 @@ class Form extends Component {
                 value={this.state.fechaVen}
                 onChange={this.handleInputChange}
                 name="fechaVen"
-                label="Detalle"
                 placeholder="fechaVen"
                 multiline
                 margin="normal"

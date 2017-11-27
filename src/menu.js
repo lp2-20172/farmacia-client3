@@ -134,27 +134,7 @@ const menus = [
         ]
 
       },
-      {
-        path: '/catalogo/detalleVentas',
-        title: 'Detalle Ventas',
-        replace: '/catalogo/detalleVentas/list',
-        icon: 'cart-arrow-down',
-        routes: [
-          {
-            path: '/catalogo/detalleVentas/list',
-            title: 'list',
-          },
-          {
-            path: '/catalogo/detalleVentas/new',
-            title: 'nuevo',
-          },
-          {
-            path: '/catalogo/detalleVentas/edit/:id',
-            title: 'editando detalle venta',
-          }
-        ]
-
-      },
+      
        {
         path: '/catalogo/productos',
         title: 'Productos',
@@ -214,6 +194,27 @@ const menus = [
           {
             path: '/catalogo/ventas/edit/:id',
             title: 'Edit',
+          }
+        ]
+
+      },
+      {
+        path: '/catalogo/detalleVentas',
+        title: 'Detalle Ventas',
+        replace: '/catalogo/detalleVentas/list',
+        icon: 'cart-arrow-down',
+        routes: [
+          {
+            path: '/catalogo/detalleVentas/list',
+            title: 'list',
+          },
+          {
+            path: '/catalogo/detalleVentas/new',
+            title: 'nuevo',
+          },
+          {
+            path: '/catalogo/detalleVentas/edit/:id',
+            title: 'editando detalle venta',
           }
         ]
 
