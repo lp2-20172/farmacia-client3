@@ -24,16 +24,17 @@ import UnidadMedForm  from './components/unidadMeds/Form'
 
 import { RouteWithSubRoutes } from './node_m/react-router-dom-ext'
 
-////
-
-
-
 const styles = { color: 'white', backgroundColor: 'blue' }
+
 const Home = () => (
   <div style={styles}> 
     <h2>s
     </h2>
-  </div>
+  
+  <button type="button">×</button>
+  <i>info</i>
+  Lorem Ipsum
+</div>
 )
 const Sandwiches = () => <h2>Hellooo...!</h2>
 
@@ -228,6 +229,25 @@ const routes = [
           {
             path: '/catalogo/ventas/edit/:id',
             component: VentaForm
+          },
+          
+        ]
+      },
+      {
+        path: '/catalogo/detalleVentas',
+        component: Tacos,
+        routes: [
+          {
+            path: '/catalogo/detalleVentas/list',
+            component: DetalleCompraList
+          },
+          {
+            path: '/catalogo/detalleVentas/new',
+            component: DetalleCompraForm
+          },
+          {
+            path: '/catalogo/detalleVentas/edit/:id',
+            component: DetalleCompraForm
           },
           
         ]

@@ -1,25 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Card, { CardHeader, CardContent } from 'material-ui/Card'
-import Avatar from 'material-ui/Avatar'
-//import Typography from 'material-ui/Typography'
-//import TextField from 'material-ui/TextField';
-
-import { save, getById, update } from '../../actions/venta-action'
+import Button from 'material-ui/Button';    
+import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux'
+import { save, getById, update } from '../../actions/venta-action'
 
 class Form extends Component {
-    /*
-        constructor(props) {
-            super(props);
-            this.state = {
-                d: {
-                    codigo: '',
-                    nombre: '',
-                },
-                saving: false
-            }
-        }*/
     constructor(props) {
         super(props);
         this.state = {
@@ -28,40 +14,12 @@ class Form extends Component {
             nombre: props.data ? props.data.nombre : ''
         }
     }
-    /*
-        componentWillReceiveProps = (nextProps) => { // Load Asynchronously
-            const { data } = nextProps;
-            console.log('componentWillReceiveProps data:' + JSON.stringify(data))
-            this.setState({
-                id: data.id,
-                codigo: data.codigo,
-                nombre: data.nombre
-            })
-        }
-    */
-    componentWillMount = () => {
-        /*
-        const { id } = this.props.match.params
-        if (id) {
-            //this.props.getById(id)
-            //this.props.getItemAsync(id)
+    handleSubmit(event) {
+        alert('esta seguro? ' + this.state.value);
+        event.preventDefault();
+      }
 
-            this.props.getById(id).then(data => {
-                console.log('componentWillReceiveProps data:' + JSON.stringify(data))
-                this.setState({
-                    id: data.id,
-                    codigo: data.codigo,
-                    nombre: data.nombre
-                })
-            }).catch(e => {
-
-            });
-        }
-        */
-    }
-
-
-    componentDidMount = () => {
+    componentDidMount() {
         const { id } = this.props.match.params
         if (id) {
             this.props.getById(id).then(data => {
@@ -73,73 +31,69 @@ class Form extends Component {
             });
         }
     }
-
-    handleChange = (event) => {
-        //this.setState({ value: event.target.value });
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
+    handleInputChange = event => {
+        const target = event.target
+        const value = target.type === 'checkbox' ? target.checked : target.value
+        const name = target.name
 
         this.setState({
             [name]: value
-        });
+        })
     }
+    handleSubmit = event => {
+        event.preventDefault()
+        console.log('d=' + JSON.stringify(this.state))
 
-    handleSubmit = (event) => {
         const { id } = this.props.match.params
         if (id) {
-            //console.log('handleSubmit state:' + JSON.stringify(this.state))
-            this.props.update(this.state, this.props.history)
+            this.props.update(this.state, this.props.history).then(r => {
+                r.push('/catalogo/ventas/list')
+            }, error => {
+                throw (error)
+            })
         } else {
-            this.props.save(this.state, this.props.history)
+            this.props.save(this.state, this.props.history).then(r => {
+                r.push('/catalogo/ventas/list')
+            }, error => {
+                throw (error)
+            })
         }
-        //this.props.history.push('/categorias/list');
-        event.preventDefault();
     }
-
     render() {
-        //const { data } = this.props
+        //console.log(JSON.stringify(this.props))
+        //const { list } = this.props
         return (
-            <Card>
-                <CardHeader
-                    avatar={
-                        <Avatar aria-label="Recipe" >
-                            R
-                          </Avatar>
-                    }
-                    title="User Form"
-                    subheader="Users Form"
+            <div>
+                <center>
+                <TextField
+                    value={this.state.nombre}
+                    onChange={this.handleInputChange}
+                    name="nombre"
+                    label="Nombre Almacen"
+                    placeholder="Nombre"
+                    multiline
+                    margin="normal"
                 />
-                <CardContent>
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                        nro_doc:
-                            <input type="text" name="nro_doc" value={this.state.nro_doc} onChange={this.handleChange} />
-                        </label>
-                        <br />
-
-                        <label>
-                        fecha:
-                            <input type="text" name="fecha" value={this.state.fecha} onChange={this.handleChange} />
-                        </label>
-                        <label>
-                        total:
-                            <input type="text" name="total" value={this.state.total} onChange={this.handleChange} />
-                        </label>
-                        <br />
-
-                        <label>
-                        vendedor:
-                            <input type="text" name="vendedor" value={this.state.vendedor} onChange={this.handleChange} />
-                        </label>
-                        <input type="submit" value="Submit" />
-                    </form>
-                </CardContent>
-            </Card>
+                <br></br>
+                <TextField
+                    value={this.state.direccion}
+                    onChange={this.handleInputChange}
+                    name="direccion"
+                    label="Direccion"
+                    placeholder="Direccion"
+                    multiline
+                    margin="normal"
+                />
+                <form onSubmit={this.handleSubmit}>
+                    <Button type="submit" raised color="primary">
+                        Guardar
+                    </Button>
+                </form>
+                </center>
+            </div>
         )
     }
 }
-
 Form.propTypes = {
     data: PropTypes.object
 }
@@ -155,19 +109,8 @@ const mapStateToProps = (state, props) => {
     }
 
 }
-/*
-const mapDispatchToProps = (dispatch) => {
-    return {
-        save: (d, h) => { dispatch(save(d, h)) },
-        getList: (q) => { dispatch(getList(q)) },
-        getById: (id) => { dispatch(getById(id)) },
-        update: (d, h) => { dispatch(update(d, h)) },
-    }
-}
-*/
 export default connect(mapStateToProps, {
     save,
     getById,
     update
-
 })(Form)

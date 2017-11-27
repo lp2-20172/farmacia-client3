@@ -47,7 +47,7 @@ class List extends Component {
         }
         return (
             <div>
-            <h2>Lista Almacen</h2>
+            <h2>Unidad de Medida</h2>
             <label>
             <TextField
                 id="search"
