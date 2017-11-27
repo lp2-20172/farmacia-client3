@@ -7,14 +7,10 @@ import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
 import ModeEditIcon from 'material-ui-icons/ModeEdit';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
-import Typography from 'material-ui/Typography'
 import Paper from 'material-ui/Paper';
-import Card, { CardHeader, CardContent } from 'material-ui/Card'
+import Card, { CardContent } from 'material-ui/Card'
 import Button from 'material-ui/Button';
-import AddIcon from 'material-ui-icons/Add';
-import {
-    Link
-} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 class List extends Component {
@@ -61,7 +57,6 @@ class List extends Component {
             <Button
                     icon={{name: 'search'}}
                     component={Link}
-                    raised
                     to="/catalogo/productos/new"
                     raised color="accent"
                 >

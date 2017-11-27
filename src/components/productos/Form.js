@@ -2,30 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';    
 import TextField from 'material-ui/TextField';
-import { FormGroup, FormControlLabel } from 'material-ui/Form';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import Card, { CardHeader, CardContent } from 'material-ui/Card'
-import Avatar from 'material-ui/Avatar'
-import Dialog from 'material-ui/Dialog';
-//import Typography from 'material-ui/Typography'
-//import TextField from 'material-ui/TextField';
-
 import { save, getById, update } from '../../actions/producto-action'
 import { connect } from 'react-redux'
 
 
 class Form extends Component {
-    /*
-        constructor(props) {
-            super(props);
-            this.state = {
-                d: {
-                    codigo: '',
-                    nombre: '',
-                },
-                saving: false
-            }
-        }*/
+
     constructor(props) {
         super(props);
         this.state = {
@@ -40,17 +22,7 @@ class Form extends Component {
             categoria: props.data ? props.data.categoria : ''
         }
     }
-    /*
-        componentWillReceiveProps = (nextProps) => { // Load Asynchronously
-            const { data } = nextProps;
-            console.log('componentWillReceiveProps data:' + JSON.stringify(data))
-            this.setState({
-                id: data.id,
-                codigo: data.codigo,
-                nombre: data.nombre
-            })
-        }
-    */
+
     componentWillMount = () => {
         /*
         const { id } = this.props.match.params
