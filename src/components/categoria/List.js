@@ -109,7 +109,7 @@ class List extends Component {
                                     SnackbarContentProps={{
                                         'aria-describedby': 'message-id',
                                     }}
-                                    message={<span id="message-id">Se ha Borrado Corecctamente</span>}
+                                    message={<span id="message-id">Se ha Borrado Correctamente</span>}
                                     />
                                 </IconButton>
                                         </TableCell>

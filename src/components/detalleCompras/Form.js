@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Button from 'material-ui/Button';    
+import TextField from 'material-ui/TextField';
+import Card from 'material-ui/Card'
 import { connect } from 'react-redux'
 import { save, getById, update } from '../../actions/detalleCompra-action'
 
@@ -9,10 +12,19 @@ class Form extends Component {
         this.state = {
             id: props.data ? props.data.id : null,
             nro_doc: props.data ? props.data.nro_doc : '',
-            cantidad: props.data ? props.data.cantidad : '',
+            cantidad: props.data ? props.data.nombre : '',
             precio_unitario: props.data ? props.data.precio_unitario : ''
-        }
+        }/*
+        this.state = {
+            id:  null,
+            codigo:'',
+            nombre: ''
+        }*/
     }
+    handleSubmit(event) {
+        alert('Your favorite flavor is: ' + this.state.value);
+        event.preventDefault();
+      }
 
     componentDidMount() {
         const { id } = this.props.match.params
@@ -22,7 +34,7 @@ class Form extends Component {
                     id: data.id,
                     nro_doc: data.nro_doc,
                     cantidad: data.cantidad,
-                    precio_unitario: data.precio_unitario,
+                    precio_unitario: data.precio_unitario
                 });
             });
         }
@@ -45,13 +57,13 @@ class Form extends Component {
         const { id } = this.props.match.params
         if (id) {
             this.props.update(this.state, this.props.history).then(r => {
-                r.push('/detalleCopmras/list')
+                r.push('/catalogo/detalleCompras/list')
             }, error => {
                 throw (error)
             })
         } else {
             this.props.save(this.state, this.props.history).then(r => {
-                r.push('/detalleCompra/list')
+                r.push('/catalogo/detalleCompras/list')
             }, error => {
                 throw (error)
             })
@@ -62,30 +74,57 @@ class Form extends Component {
         //console.log(JSON.stringify(this.props))
         //const { list } = this.props
         return (
+            <Card>
             <div>
+                <center>
+                <TextField
+                    value={this.state.nro_doc}
+                    onChange={this.handleInputChange}
+                    name="nro_doc"
+                    label="Numero documento"
+                    placeholder="ingrese numeros"
+                    multiline
+                    margin="normal"
+                />
+                <br></br>
+                <TextField
+                    value={this.state.cantidad}
+                    onChange={this.handleInputChange}
+                    name="cantidad"
+                    label="Cantidad"
+                    placeholder="ingrese numeros"
+                    multiline
+                    margin="normal"
+                />
+                <br></br>
+                <TextField
+                    value={this.state.precio_unitario}
+                    onChange={this.handleInputChange}
+                    name="precio_unitario"
+                    label="Precio"
+                    placeholder="ingrese precio por unidad"
+                    multiline
+                    margin="normal"
+                />
                 <form onSubmit={this.handleSubmit}>
-                    <label>Nuemero Docuemnto:
-            <input type="text"
-                            value={this.state.nro_doc}
-                            onChange={this.handleInputChange}
-                            name="nro_doc" placeholder="Numero Documento"/>
-                    </label><br />
-                    <label>Cantidad:
-            <input type="text"
-                            value={this.state.cantidad}
-                            onChange={this.handleInputChange}
-                            name="cantidad" placeholder="Cantidad"/>
-                    </label>
-                    <label>Precio Unitario:
-            <input type="text"
-                            value={this.state.precio_unitario}
-                            onChange={this.handleInputChange}
-                            name="precio_unitario" placeholder="Precio Uniario" />
-                    </label>
-                    <input type="submit" value="Submit" />
+                    <Button type="submit" raised color="primary">
+                        Guardar
+                    </Button>
+                    <Button
+                            raised
+                            color="accent"
+                            type="reset"
+                            
+                            margin="normal"
+                            onClick={(e) => this.props.history.push('/catalogo/detalleCompras/list')}>
+                        
+                            cancelar
+                        </Button>
                 </form>
-
+                </center>
             </div>
+           
+            </Card>
         )
     }
 }
@@ -96,7 +135,7 @@ Form.propTypes = {
 const mapStateToProps = (state, props) => {
     if (props.match.params.id) {
         return {
-            data: state.detalleCompra.list.find(item => item.id + '' === props.match.params.id + '')
+            data: state.almacen.list.find(item => item.id + '' === props.match.params.id + '')
         }
     }
     return {

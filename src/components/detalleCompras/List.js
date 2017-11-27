@@ -1,75 +1,73 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Card, { CardHeader, CardContent } from 'material-ui/Card'
-import Avatar from 'material-ui/Avatar'
-import Typography from 'material-ui/Typography'
+import { connect } from 'react-redux'
+import { getList, del } from '../../actions/detalleCompra-action'
+import DeleteIcon from 'material-ui-icons/Delete';
+import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
+import ModeEditIcon from 'material-ui-icons/ModeEdit';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
-
-import { getList, del } from '../../actions/detalleCompra-action'
-import { connect } from 'react-redux'
-
+import Card, { CardContent } from 'material-ui/Card'
 import Button from 'material-ui/Button';
-import AddIcon from 'material-ui-icons/Add';
 import {
     Link
 } from 'react-router-dom'
 
 
 class List extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            q: "",
+        }
+    }
+
     componentWillMount() {
-        this.props.getList("")
+        this.props.getList(this.state.q)
     }
+    handleInputChange = event => {
+        const target = event.target
+        const value = target.type === 'checkbox' ? target.checked : target.value
+        const name = target.name
 
-    change = (e) => {
-        const q = e.target.value
-        console.log("q:" + q)
-        this.props.getList(q)
-    }
-
-    handleClick = () => {
-        this.props.history.push('/catalogo/detalleCompras/new');
+        this.setState({
+            [name]: value
+        })
+        this.props.getList(this.state.q)
     }
 
     render() {
+        
         let { list, del } = this.props
-        if (list) {
-            
-        } else{
-            list =[]
-
+        if (list === null) {
+            list = []
         }
-
         return (
-
-            <Card>
-                <CardHeader
-                    avatar={
-                        <Avatar aria-label="Recipe" >
-                            R
-                          </Avatar>
-                    }
-                    title="Lista Detalle Compras"
-                    subheader="Noviembre, 08 del 2017"
-                />
-
+            <div>
+            <h2>Lista detalle de Compra</h2>
+            <label>
+            <TextField
+            id="search"
+            label="Buscar"
+            type="search" 
+            value={this.state.q}
+            onChange={this.handleInputChange}
+            name="q"
+            margin="normal"
+            /></label>
+            
+            <Button
+                    icon={{name: 'search'}}
+                    component={Link}
+                    to="/catalogo/detalleCompras/new"
+                    raised color="accent"
+                >
+                    <strong>{'+ Agregar'}</strong>
+                </Button>
+            <Card> 
                 <CardContent>
-                    <Typography component="p">
-                        {this.props.q}
-                    </Typography>
-
-                    <TextField
-                        id="search"
-                        label="Buscar"
-                        value={this.props.q}
-                        onChange={this.change}
-                        margin="normal"
-                    />
-
-                    <Button fab color="primary" aria-label="add" onClick={this.handleClick}>
-                        <AddIcon />
-                    </Button>
+                
 
                     <Paper style={{
                         overflowX: 'auto',
@@ -78,7 +76,7 @@ class List extends Component {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>#</TableCell>
-                                    <TableCell >Nuemro de Documento</TableCell>
+                                    <TableCell >Numero Documento</TableCell>
                                     <TableCell >Cantidad</TableCell>
                                     <TableCell >Precio Unitario</TableCell>
                                     <TableCell >Opciones</TableCell>
@@ -91,13 +89,17 @@ class List extends Component {
                                         <TableCell numeric>{index + 1}</TableCell>
                                         <TableCell >{d.nro_doc}</TableCell>
                                         <TableCell >{d.cantidad}</TableCell>
-                                        <TableCell >s/.{d.precio_unitario}</TableCell>
-                                        
+                                        <TableCell >{d.precio_unitario}</TableCell>
                                         <TableCell >
-                                            <Link to={`/catalogo/detalleCompras/edit/${d.id}`} className="ui basic button green">Edit</Link>
-                                            </TableCell>
-                                            <TableCell >
-                                            <Button onClick={() => del(d.id, this.props.history)} >Delete</Button>
+                                        <Link to={`/catalogo/detalleCompras/edit/${d.id}`}>
+                                    <Button  aria-label="edit">
+                                        <ModeEditIcon />
+                                    </Button>
+                                </Link>
+                                        
+                                <IconButton onClick={() => del(d.id)}  aria-label="Delete">
+                                <DeleteIcon/>
+                                </IconButton>
                                         </TableCell>
                                     </TableRow>
                                 )}
@@ -107,27 +109,16 @@ class List extends Component {
                 </CardContent>
 
             </Card>
-        );
+            </div>
+        )
     }
 }
 List.propTypes = {
     list: PropTypes.array
 }
-
 const mapStateToProps = (state) => {
-    return {
-        list: state.detalleCompra.list
-    }
+    return { list: state.detalleCompra.list }
 }
-
-/*
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getList: (q) => { dispatch(getList(q)) },
-        del: (id, h) => { dispatch(del(id, h)) }
-    }
-}
-*/
 export default connect(mapStateToProps, {
     getList,
     del

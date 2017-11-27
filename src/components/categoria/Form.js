@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import Button from 'material-ui/Button';    
 import TextField from 'material-ui/TextField';
+import { connect } from 'react-redux'
+import Save from 'material-ui-icons/Save';
 import { save, getById, update } from '../../actions/categoria-action'
 
 class Form extends Component {
@@ -18,6 +20,10 @@ class Form extends Component {
             nombre: ''
         }*/
     }
+    handleSubmit(event) {
+        alert('Your favorite flavor is: ' + this.state.value);
+        event.preventDefault();
+      }
 
     componentDidMount() {
         const { id } = this.props.match.params
@@ -67,21 +73,29 @@ class Form extends Component {
         //const { list } = this.props
         return (
             <div>
+                <center>
                 <TextField
-                        id="nombre"
-                        label="Nombre"
-                        name="nombre"
-                        value={this.state.nombre}
-                        onChange={this.handleInputChange}
-                        margin="normal"
-                    /> 
+                value={this.state.nombre}
+                onChange={this.handleInputChange}
+                name="nombre"
+                label="Nombre Almacen"
+                placeholder="Nombre"
+                multiline
+                margin="normal"
+                />
+                <br></br>
+                
                 <form onSubmit={this.handleSubmit}>
-                <input type="file" />d
-
-                    <input type="submit" value="Guardar Cambios" />
+                    <Button type="submit" raised color="primary">
+                    <Save/>Guardar
+                    </Button>
+                    <Button raised color="accent" type="reset" onClick={(e) => this.props.history.push('/catalogo/categorias/list')}>
+                            cancelar
+                        </Button>
                 </form>
-
+                </center>
             </div>
+            
         )
     }
 }

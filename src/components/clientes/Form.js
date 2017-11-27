@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';    
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux'
-import { save, getById, update } from '../../actions/almacen-action'
+import { getList as getClienteList } from '../../actions/cliente-action'
+import { save, getById, update } from '../../actions/cliente-action'
 
 class Form extends Component {
     constructor(props) {

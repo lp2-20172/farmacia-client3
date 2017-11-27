@@ -96,12 +96,9 @@ class Form extends Component {
     render() {
         return (
             <Card>
-                <CardHeader
-                avatar={<Avatar aria-label="Recipe" >R</Avatar>}
-                title="Agergar una Compra"
-                subhead="Noviembre 8, 2017"
-                subheader="Noviembre 8, 2017"
-              />
+                <CardHeader>
+                    <h2>Compras</h2>
+                </CardHeader>
                 <CardContent>
                     <form onSubmit={this.handleSubmit}>
                         <label>
