@@ -1,10 +1,9 @@
 import {
-    CATEGORIA_LIST,
-    CATEGORIA_LIST_FAILURE,
-    CATEGORIA_ADD, CATEGORIA_UPDATE,
-    CATEGORIA_DELETE
-} from '../actions/categoria-action'
-//import { CATEGORIA_FETCH,  } from '../actions/categoria-action'
+    DETALLEVENTA_LIST,
+    DETALLEVENTA_LIST_FAILURE,
+    DETALLEVENTA_ADD, DETALLEVENTA_UPDATE,
+    DETALLEVENTA_DELETE
+} from '../actions/detalleVenta-action'
 
 const initialState = {
     list: [],
@@ -12,20 +11,20 @@ const initialState = {
     error: null
 }
 
-const categoriaReducer = (state = initialState, action) => {
+const detalleVentaReducer = (state = initialState, action) => {
     switch (action.type) {
-        case CATEGORIA_LIST:
+        case DETALLEVENTA_LIST:
             return {
                 ...state,
                 list: action.list,
                 error: null
             }
-        case CATEGORIA_LIST_FAILURE: return {
+        case DETALLEVENTA_LIST_FAILURE: return {
             ...state,
             list: [],
             error: action.error,
         }
-        case CATEGORIA_ADD:
+        case DETALLEVENTA_ADD:
             return {
                 ...state,
             }
@@ -35,11 +34,11 @@ const categoriaReducer = (state = initialState, action) => {
             ...state,
             data: action.data
         }*/
-        case CATEGORIA_UPDATE:
+        case DETALLEVENTA_UPDATE:
             return {
                 ...state,
             }
-        case CATEGORIA_DELETE:
+        case DETALLEVENTA_DELETE:
             const id = action.data
             return {
                 ...state,
@@ -49,4 +48,4 @@ const categoriaReducer = (state = initialState, action) => {
             return state;
     }
 }
-export default categoriaReducer
+export default detalleVentaReducer

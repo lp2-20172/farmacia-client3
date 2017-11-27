@@ -30,10 +30,6 @@ const Home = () => (
   <div style={styles}> 
     <h2>s
     </h2>
-  
-  <button type="button">×</button>
-  <i>info</i>
-  Lorem Ipsum
 </div>
 )
 const Sandwiches = () => <h2>Hellooo...!</h2>
@@ -239,15 +235,15 @@ const routes = [
         routes: [
           {
             path: '/catalogo/detalleVentas/list',
-            component: DetalleCompraList
+            component: DetalleVentaList
           },
           {
             path: '/catalogo/detalleVentas/new',
-            component: DetalleCompraForm
+            component: DetalleVentaForm
           },
           {
             path: '/catalogo/detalleVentas/edit/:id',
-            component: DetalleCompraForm
+            component: DetalleVentaForm
           },
           
         ]

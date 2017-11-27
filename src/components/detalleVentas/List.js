@@ -1,75 +1,73 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Card, { CardHeader, CardContent } from 'material-ui/Card'
-import Avatar from 'material-ui/Avatar'
-import Typography from 'material-ui/Typography'
+import { connect } from 'react-redux'
+import { getList, del } from '../../actions/detalleVenta-action'
+import DeleteIcon from 'material-ui-icons/Delete';
+import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
+import ModeEditIcon from 'material-ui-icons/ModeEdit';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
-
-import { getList, del } from '../../actions/detalleVenta-action'
-import { connect } from 'react-redux'
-
+import Card, { CardContent } from 'material-ui/Card'
 import Button from 'material-ui/Button';
-import AddIcon from 'material-ui-icons/Add';
 import {
     Link
 } from 'react-router-dom'
 
 
 class List extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            q: "",
+        }
+    }
+
     componentWillMount() {
-        this.props.getList("")
+        this.props.getList(this.state.q)
     }
+    handleInputChange = event => {
+        const target = event.target
+        const value = target.type === 'checkbox' ? target.checked : target.value
+        const name = target.name
 
-    change = (e) => {
-        const q = e.target.value
-        console.log("q:" + q)
-        this.props.getList(q)
-    }
-
-    handleClick = () => {
-        this.props.history.push('/catalogo/detalleVentas/new');
+        this.setState({
+            [name]: value
+        })
+        this.props.getList(this.state.q)
     }
 
     render() {
+        
         let { list, del } = this.props
-        if (list) {
-            
-        } else{
-            list =[]
-
+        if (list === null) {
+            list = []
         }
-
         return (
-
-            <Card>
-                <CardHeader
-                    avatar={
-                        <Avatar aria-label="Recipe" >
-                            R
-                          </Avatar>
-                    }
-                    title="User List"
-                    subheader="Users list"
-                />
-
+            <div>
+            <h2>Detalle Venta</h2>
+            <label>
+                <TextField
+                    id="search"
+                    label="Buscar"
+                    type="search" 
+                    value={this.state.q}
+                    onChange={this.handleInputChange}
+                    name="q"
+                    margin="normal"
+                /></label>
+            
+            <Button
+                icon={{name: 'search'}}
+                component={Link}
+                to="/catalogo/detalleVentas/new"
+                raised color="accent"
+                >
+                <strong>{'+ Agregar'}</strong>
+                </Button>
+            <Card> 
                 <CardContent>
-                    <Typography component="p">
-                        q={this.props.q}
-                    </Typography>
-
-                    <TextField
-                        id="search"
-                        label="Search"
-                        value={this.props.q}
-                        onChange={this.change}
-                        margin="normal"
-                    />
-
-                    <Button fab color="primary" aria-label="add" onClick={this.handleClick}>
-                        <AddIcon />
-                    </Button>
+                
 
                     <Paper style={{
                         overflowX: 'auto',
@@ -77,10 +75,12 @@ class List extends Component {
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>#</TableCell>
-                                    <TableCell >cantidad</TableCell>
-                                    <TableCell >Edit</TableCell>
-                                    <TableCell >Delete</TableCell>
+                                    <TableCell>N°</TableCell>
+                                    <TableCell >Cantidad</TableCell>
+                                    <TableCell >Precio x Unidad</TableCell>
+                                    <TableCell >Producto</TableCell>
+                                    <TableCell >Venta</TableCell>
+                                    <TableCell >Opciones</TableCell>
                                 </TableRow>
                             </TableHead>
 
@@ -89,12 +89,19 @@ class List extends Component {
                                     <TableRow key={index}>
                                         <TableCell numeric>{index + 1}</TableCell>
                                         <TableCell >{d.cantidad}</TableCell>
+                                        <TableCell >s/ {d.precio_uni}</TableCell>
+                                        <TableCell >{d.producto}</TableCell>
+                                        <TableCell >{d.venta}</TableCell>
+                                        <TableCell >
+                                        <Link to={`/catalogo/detalleVentas/edit/${d.id}`}>
+                                    <Button  aria-label="edit">
+                                        <ModeEditIcon />
+                                    </Button>
+                                </Link>
                                         
-                                        <TableCell >
-                                            <Link to={`/catalogo/detalleVentas/edit/${d.id}`} className="ui basic button green">Edit</Link>
-                                        </TableCell>
-                                        <TableCell >
-                                            <Button onClick={() => del(d.id, this.props.history)} >Delete</Button>
+                                <IconButton onClick={() => del(d.id)}  aria-label="Delete">
+                                <DeleteIcon/>
+                                </IconButton>
                                         </TableCell>
                                     </TableRow>
                                 )}
@@ -104,27 +111,16 @@ class List extends Component {
                 </CardContent>
 
             </Card>
-        );
+            </div>
+        )
     }
 }
 List.propTypes = {
     list: PropTypes.array
 }
-
 const mapStateToProps = (state) => {
-    return {
-        list: state.detalleVenta.list
-    }
+    return { list: state.detalleVenta.list }
 }
-
-/*
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getList: (q) => { dispatch(getList(q)) },
-        del: (id, h) => { dispatch(del(id, h)) }
-    }
-}
-*/
 export default connect(mapStateToProps, {
     getList,
     del

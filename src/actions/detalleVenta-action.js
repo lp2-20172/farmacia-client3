@@ -1,33 +1,19 @@
-//import axios from "axios";
-
 import client from './'
 
-//https://github.com/brandiqa/redux-crud-example/blob/master/src/actions/contact-actions.js#L22
+const url = "/api-catalogo/detalleVenta/"
+export const DETALLEVENTA_LIST = "DETALLEVENTA_LIST"
+export const detalleVentaList = (list) => (
+    {
+        type: DETALLEVENTA_LIST,
+        list
+    }
+)
 
-const url = '/api-catalogo/detalleVenta/'
-
-export const DETALLEVENTA_LIST_REQUEST = "DETALLEVENTA_LIST_REQUEST"
-export const DETALLEVENTA_LIST_SUCCESS = 'DETALLEVENTA_LIST_SUCCESS'
 export const DETALLEVENTA_LIST_FAILURE = 'DETALLEVENTA_LIST_FAILURE'
-
-export const detalleVentaList = () => ({
-    type: DETALLEVENTA_LIST_REQUEST,
-})
-
-export const detalleVentaListSuccess = (list) => ({
-    type: DETALLEVENTA_LIST_SUCCESS,
-    list
-})
-
 export const detalleVentaListFailure = error => ({
     type: DETALLEVENTA_LIST_FAILURE,
     error
 })
-
-export const DETALLEVENTA_ADD = "DETALLEVENTA_ADD"
-export const DETALLEVENTA_FETCH = "DETALLEVENTA_FETCH"
-export const DETALLEVENTA_UPDATE = "DETALLEVENTA_UPDATE"
-export const DETALLEVENTA_DELETE = "DETALLEVENTA_DELETE"
 
 export const getList = (q = '') => {
     let params = {
@@ -37,92 +23,97 @@ export const getList = (q = '') => {
     }
     return (dispatch) => {
         client.get(url, params).then(r => {
-            dispatch(detalleVentaListSuccess(r.data))
-        }).catch(error => { //throw (error)
+            dispatch(detalleVentaList(r.data))
+        }).catch(error => {
+            //throw (error)
             //console.log('getList catch:' + JSON.stringify(error.response))
             if (error.response) {
                 dispatch(detalleVentaListFailure(error.response.data.detail))
             } else if (error.request) {
                 console.log(error.request);
-                dispatch(detalleVentaListFailure(JSON.stringify('Error '+error.request)))
+                dispatch(detalleVentaListFailure(JSON.stringify('Error ' + error.request)))
             } else {
                 // Something happened in setting up the request that triggered an Error
                 console.log('Error', error.message);
-                dispatch(detalleVentaListFailure('Error '+error.message))
+                dispatch(detalleVentaListFailure('Error ' + error.message))
             }
             //console.log(error.config);
+
         })
     }
 }
 
-export function save(data, history) {
-    console.log('save data:' + JSON.stringify(data))
+
+export const DETALLEVENTA_ADD = "DETALLEVENTA_ADD"
+export const detalleVentaAdd = detalleVenta => (
+    {
+        type: DETALLEVENTA_ADD,
+    }
+)
+export const save = (d, h) => {
     return (dispatch) => {
-        return client.post(url, data)
-            .then((r) => {
-                dispatch({
-                    "type": DETALLEVENTA_ADD,
-                    "data": r.data //no usado
+        return new Promise((resolve, reject) => {
+            try {
+                client.post(url, d).then(r => {
+                    dispatch(detalleVentaAdd())
+                    resolve(h)
                 })
-                history.push('/catalogo/detalleVentas/list')
-            })
-            .catch((error) => {
-                console.log(error)
-                throw (error)
-            })
+            } catch (err) {
+                reject(err)
+            }
+        })
     }
 }
 
-export function getById(id) {
-    return dispatch => {
-        return client.get(`${url}${id}`)
-            .then((r) => {
-                /*
-                dispatch({
-                    "type": DETALLECOMPRA_FETCH,
-                    "data": r.data 
-                })
-                */
-                return r.data
-            })
-            .catch((error) => {
-                console.log(error)
-                //throw (error)
-            })
-    }
-}
 
-export function update(data, history) {
+export const getById = (id) => {
     return (dispatch) => {
-        return client.put(`${url}${data.id}/`, data)
-            .then((r) => {
-                dispatch({
-                    "type": DETALLEVENTA_UPDATE,
-                    "data": r.data //no usado
-                })
-                history.push('/catalogo/detalleVentas/list')
-            })
-            .catch((error) => {
-                console.log(error)
-                throw (error)
-            })
+        return client.get(`${url}${id}`).then(r => {
+            return r.data
+        })
     }
 }
 
-export function del(_id, history) {
-    return dispatch => {
-        return client.delete(`${url}${_id}`)
-            .then((r) => {
-                //console.log('deletex r:' + JSON.stringify(r))
-                dispatch({
-                    "type": DETALLEVENTA_DELETE,
-                    "data": _id
+export const DETALLEVENTA_UPDATE = "DETALLEVENTA_UPDATE"
+export const detalleVentaUpdate = () => (
+    {
+        type: DETALLEVENTA_UPDATE,
+    }
+)
+export const update = (d, h) => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            try {
+                client.put(`${url}${d.id}/`, d).then(r => {
+                    dispatch(detalleVentaUpdate())
+                    resolve(h)
                 })
-                //history.push('/catalogo/detalleVentas')
-            })
-            .catch((error) => {
-                console.log(error)
-                throw (error)
-            })
+            } catch (err) {
+                reject(err)
+            }
+        })
+    }
+}
+
+export const DETALLEVENTA_DELETE = "DETALLEVENTA_DELETE"
+export const detalleVentaDelete = (data) => (
+    {
+        type: DETALLEVENTA_DELETE,
+        data
+    }
+)
+
+export const del = (id) => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            try {
+                client.delete(`${url}${id}`).then(r => {
+                    dispatch(detalleVentaDelete(id))
+                    resolve(r)
+                })
+            } catch (err) {
+                reject(err)
+            }
+        })
     }
 }
