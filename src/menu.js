@@ -54,6 +54,28 @@ const menus = [
 
       },
        {
+        path: '/catalogo/pedido',
+        title: 'Pedido',
+        replace: '/catalogo/pedido/list',
+        icon: 'archive',
+        routes: [
+          {
+            path: '/catalogo/pedido/list',
+            title: 'List',
+          },
+          {
+            path: '/catalogo/pedido/new',
+            title: 'New',
+          },
+          {
+            path: '/catalogo/pedido/edit/:id',
+            title: 'Edit',
+          }
+        ]
+
+      },
+
+       {
         path: '/catalogo/almacenes',
         title: 'Almacen',
         replace: '/catalogo/almacenes/list',

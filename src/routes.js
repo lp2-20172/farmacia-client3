@@ -21,6 +21,8 @@ import ClienteList  from './components/clientes/List'
 import ClienteForm  from './components/clientes/Form'
 import UnidadMedList  from './components/unidadMeds/List'
 import UnidadMedForm  from './components/unidadMeds/Form'
+import PedidoList from './components/pedido/List'
+import PedidoForm from './components/pedido/Form'
 
 import { RouteWithSubRoutes } from './node_m/react-router-dom-ext'
 
@@ -112,6 +114,24 @@ const routes = [
           {
             path: '/catalogo/categorias/edit/:id',
             component: CategoriaForm
+          },
+        ]
+      },
+      {
+        path: '/catalogo/pedido',
+        component: Tacos,
+        routes: [
+          {
+            path: '/catalogo/pedido/list',
+            component: PedidoList
+          },
+          {
+            path: '/catalogo/pedido/new',
+            component:  PedidoForm
+          },
+          {
+            path: '/catalogo/pedido/edit/:id',
+            component: PedidoForm
           },
         ]
       },

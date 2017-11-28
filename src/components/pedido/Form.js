@@ -3,19 +3,18 @@ import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';    
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux'
-//import Snackbar from 'material-ui/Snackbar';//
-
-import Card, { CardContent } from 'material-ui/Card'
-import Save from 'material-ui-icons/Save';
-import { save, getById, update } from '../../actions/unidadMed-action'
+import Snackbar from 'material-ui/Snackbar';
+import Fade from 'material-ui/transitions/Fade';
+import Card, { CardHeader, CardContent } from 'material-ui/Card'
+import { save, getById, update } from '../../actions/pedido-action'
 
 class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
             id: props.data ? props.data.id : null,
-            codigo: props.data ? props.data.codigo : '',
-            nombre: props.data ? props.data.nombre : ''
+            nombre: props.data ? props.data.nombre : '',
+            detalle: props.data ? props.data.detalle : ''
         }/*
         this.state = {
             id:  null,
@@ -34,8 +33,8 @@ class Form extends Component {
             this.props.getById(id).then(data => {
                 this.setState({
                     id: data.id,
-                    codigo: data.codigo,
-                    nombre: data.nombre
+                    nombre: data.nombre,
+                    detalle: data.detalle
                 });
             });
         }
@@ -58,61 +57,64 @@ class Form extends Component {
         const { id } = this.props.match.params
         if (id) {
             this.props.update(this.state, this.props.history).then(r => {
-                r.push('/catalogo/unidadMeds/list')
+                r.push('/catalogo/pedidos/list')
             }, error => {
                 throw (error)
             })
         } else {
             this.props.save(this.state, this.props.history).then(r => {
-                r.push('/catalogo/unidadMeds/list')
+                r.push('/catalogo/pedidos/list')
             }, error => {
                 throw (error)
             })
         }
     }
+    handleClick = () => {
+        this.setState({ open: true });
+      };
+    
+      handleRequestClose = () => {
+        this.setState({ open: false });
+      };
 
     render() {
-        //console.log(JSON.stringify(this.props))
-        //const { list } = this.props
         return (
             <div>
                 <Card>
-                <CardContent>
-                <center>
+                    <CardHeader
+                    title="Formulario de Catalogo"
+                    />
+                <CardContent>  
                 <TextField
-                value={this.state.codigo}
-                onChange={this.handleInputChange}
-                name="codigo"
-                label="Codigo"
-                placeholder="ingrese numero"
-                multiline
-                margin="normal"
+                    value={this.state.nombre}
+                    onChange={this.handleInputChange}
+                    name="nombre"
+                    label="Nombre pedidos"
+                    placeholder="Nombre"
+                    multiline
+                    margin="normal"
                 />
-                <br></br>
-                <TextField
-                value={this.state.nombre}
-                onChange={this.handleInputChange}
-                name="nombre"
-                label="Nombre"
-                placeholder="Example (Mg, Kg, mml)"
-                multiline
-                margin="normal"
-                />
+                 <br></br>
                 <form onSubmit={this.handleSubmit}>
-                <Button type="submit" raised color="primary">
-                <Save/>Guardar
-                
-                 
-                </Button>{'  '}
-                    <Button raised color="accent" type="reset" onClick={(e) => this.props.history.push('/catalogo/categorias/list')}>
-                            cancelar
+                    <Button onClick={this.handleClick} type="submit" raised color="primary">
+                    <strong >Guardar</strong>
+                    <Snackbar
+                        open={this.state.open}
+                        onRequestClose={this.handleRequestClose}
+                        transition={Fade}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">Se envio Correctamente</span>}
+                        />
+                    </Button>{' '}
+                    <Button raised color="accent" type="reset" onClick={(e) => this.props.history.push('/catalogo/pedido/list')}>
+                            <strong>Cancelar</strong>
+                            
                         </Button>
-                       
                 </form>
-                </center>
                 </CardContent>
-
-            </Card>
+                </Card>
             </div>
             
         )
@@ -125,7 +127,7 @@ Form.propTypes = {
 const mapStateToProps = (state, props) => {
     if (props.match.params.id) {
         return {
-            data: state.unidadMed.list.find(item => item.id + '' === props.match.params.id + '')
+            data: state.pedido.list.find(item => item.id + '' === props.match.params.id + '')
         }
     }
     return {
