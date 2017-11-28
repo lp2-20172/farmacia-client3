@@ -51,6 +51,8 @@ class List extends Component {
             list = []
         }
         return (
+            <Card> 
+            <CardContent>
             <div>
             <h2>Lista de Proveedores</h2>
             <label>
@@ -71,8 +73,7 @@ class List extends Component {
                 >
                     <strong>{'+ Agregar'}</strong>
                 </Button>
-            <Card> 
-                <CardContent>
+           
                 
 
                     <Paper style={{
@@ -117,10 +118,10 @@ class List extends Component {
                             </TableBody>
                         </Table>
                     </Paper>
+                    </div>
                 </CardContent>
-
             </Card>
-            </div>
+           
         )
     }
 }

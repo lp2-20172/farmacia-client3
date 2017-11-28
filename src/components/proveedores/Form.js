@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import Card, { CardContent } from 'material-ui/Card'
 import { save, getById, update } from '../../actions/proveedor-action'
 
 class Form extends Component {
@@ -65,24 +66,28 @@ class Form extends Component {
         //console.log(JSON.stringify(this.props))
         //const { list } = this.props
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <label>Empresa:
-            <input type="text"
-                            value={this.state.empresa}
-                            onChange={this.handleInputChange}
-                            name="empresa" />
-                    </label><br />
-                    <label>Ruc:
-            <input type="text"
-                            value={this.state.ruc}
-                            onChange={this.handleInputChange}
-                            name="ruc" />
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
+            <Card>
+                <CardContent>
+                <div>
+                    <form onSubmit={this.handleSubmit}>
+                        <label>Empresa:
+                <input type="text"
+                    value={this.state.empresa}
+                    onChange={this.handleInputChange}
+                    name="empresa" />
+                        </label><br />
+                        <label>Ruc:
+                <input type="text"
+                                value={this.state.ruc}
+                                onChange={this.handleInputChange}
+                                name="ruc" />
+                        </label>
+                        <input type="submit" value="Submit" />
+                    </form>
 
-            </div>
+                </div>
+                </CardContent>
+            </Card>
         )
     }
 }
