@@ -48,13 +48,13 @@ class List extends Component {
             <h2>Lista detalle de Compra</h2>
             <label>
             <TextField
-            id="search"
-            label="Buscar"
-            type="search" 
-            value={this.state.q}
-            onChange={this.handleInputChange}
-            name="q"
-            margin="normal"
+                id="search"
+                label="Buscar"
+                type="search" 
+                value={this.state.q}
+                onChange={this.handleInputChange}
+                name="q"
+                margin="normal"
             /></label>
             
             <Button

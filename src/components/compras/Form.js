@@ -97,13 +97,13 @@ class Form extends Component {
         return (
             <Card>
                 <CardHeader>
-                    <h2>Compras</h2>
+                    Compras
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={this.handleSubmit}>
                         <label>
                             Numero Documento:
-                            <input type="text" name="nro_doc" value={this.state.nro_doc} onChange={this.handleChange} />
+                            <input type="file" name="nro_doc" value={this.state.nro_doc} onChange={this.handleChange} />
                         </label>
                         <br />
                         <label>

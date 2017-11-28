@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';    
 import TextField from 'material-ui/TextField';
-import Card from 'material-ui/Card'
 import { connect } from 'react-redux'
+import Save from 'material-ui-icons/Save';
+import Card, { CardHeader, CardContent } from 'material-ui/Card'
 import { save, getById, update } from '../../actions/detalleCompra-action'
 
 class Form extends Component {
@@ -12,7 +13,7 @@ class Form extends Component {
         this.state = {
             id: props.data ? props.data.id : null,
             nro_doc: props.data ? props.data.nro_doc : '',
-            cantidad: props.data ? props.data.nombre : '',
+            cantidad: props.data ? props.data.cantidad : '',
             precio_unitario: props.data ? props.data.precio_unitario : ''
         }/*
         this.state = {
@@ -74,57 +75,55 @@ class Form extends Component {
         //console.log(JSON.stringify(this.props))
         //const { list } = this.props
         return (
-            <Card>
             <div>
-                <center>
+                 <Card>
+                 <CardHeader
+                    title="Formulario de Detalle Compras"
+                />
+                 <CardContent>  
+
                 <TextField
+                    type="numeric"
                     value={this.state.nro_doc}
                     onChange={this.handleInputChange}
                     name="nro_doc"
-                    label="Numero documento"
-                    placeholder="ingrese numeros"
+                    label="Numero de Documento"
+                    placeholder="Example 123"
                     multiline
                     margin="normal"
-                />
-                <br></br>
+                /><br></br>
                 <TextField
+                    type="numeric"
                     value={this.state.cantidad}
                     onChange={this.handleInputChange}
                     name="cantidad"
                     label="Cantidad"
-                    placeholder="ingrese numeros"
+                    placeholder="ingrese numero"
                     multiline
                     margin="normal"
-                />
-                <br></br>
+                /><br></br>
                 <TextField
+                    type="numeric"
                     value={this.state.precio_unitario}
                     onChange={this.handleInputChange}
                     name="precio_unitario"
-                    label="Precio"
-                    placeholder="ingrese precio por unidad"
+                    label="Precio Unitario"
+                    placeholder="ingrese numero"
                     multiline
                     margin="normal"
-                />
+                /><br></br>
                 <form onSubmit={this.handleSubmit}>
                     <Button type="submit" raised color="primary">
-                        Guardar
-                    </Button>{' '}
-                    <Button
-                            raised
-                            color="accent"
-                            type="reset"
-                            
-                            margin="normal"
-                            onClick={(e) => this.props.history.push('/catalogo/detalleCompras/list')}>
-                        
-                            cancelar
+                    <strong>Guardar</strong>
+                    </Button>{ '' }
+                    <Button raised color="accent" type="reset" onClick={(e) => this.props.history.push('/catalogo/detalleCompras/list')}>
+                            <strong>Cancelar</strong>
                         </Button>
                 </form>
-                </center>
+                </CardContent>
+                </Card>
             </div>
-           
-            </Card>
+            
         )
     }
 }
@@ -135,7 +134,7 @@ Form.propTypes = {
 const mapStateToProps = (state, props) => {
     if (props.match.params.id) {
         return {
-            data: state.almacen.list.find(item => item.id + '' === props.match.params.id + '')
+            data: state.detalleCompra.list.find(item => item.id + '' === props.match.params.id + '')
         }
     }
     return {
