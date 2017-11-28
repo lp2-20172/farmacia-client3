@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Button from 'material-ui/Button';    
+import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux'
-import Card, { CardContent } from 'material-ui/Card'
+import Card, { CardHeader, CardContent } from 'material-ui/Card'
 import { save, getById, update } from '../../actions/proveedor-action'
 
 class Form extends Component {
@@ -14,10 +16,14 @@ class Form extends Component {
         }/*
         this.state = {
             id:  null,
-            codigo:'',
-            nombre: ''
+            empresa:'',
+            ruc: ''
         }*/
     }
+    handleSubmit(event) {
+        alert('Your favorite flavor is: ' + this.state.value);
+        event.preventDefault();
+      }
 
     componentDidMount() {
         const { id } = this.props.match.params
@@ -66,28 +72,42 @@ class Form extends Component {
         //console.log(JSON.stringify(this.props))
         //const { list } = this.props
         return (
-            <Card>
-                <CardContent>
-                <div>
-                    <form onSubmit={this.handleSubmit}>
-                        <label>Empresa:
-                <input type="text"
+            <div>
+                 <Card>
+                 <CardHeader
+                    title="Formulario de Catalogo"
+                />
+                 <CardContent>  
+                <TextField
                     value={this.state.empresa}
                     onChange={this.handleInputChange}
-                    name="empresa" />
-                        </label><br />
-                        <label>Ruc:
-                <input type="text"
-                                value={this.state.ruc}
-                                onChange={this.handleInputChange}
-                                name="ruc" />
-                        </label>
-                        <input type="submit" value="Submit" />
-                    </form>
-
-                </div>
+                    name="empresa"
+                    placeholder="Empresa (max 10)"
+                    multiline
+                    margin="normal"
+                />
+                <br></br>
+                <TextField
+                    value={this.state.ruc}
+                    onChange={this.handleInputChange}
+                    name="ruc"
+                    placeholder="Ruc"
+                    multiline
+                    margin="normal"
+                />
+                <br></br>
+                <form onSubmit={this.handleSubmit}>
+                    <Button type="submit" raised color="primary">
+                    <strong>Guardar</strong>
+                    </Button>{' '}
+                    <Button raised color="accent" type="reset" onClick={(e) => this.props.history.push('/catalogo/proveedores/list')}>
+                            <strong>Cancelar</strong>
+                        </Button>
+                </form>
                 </CardContent>
-            </Card>
+                </Card>
+            </div>
+            
         )
     }
 }

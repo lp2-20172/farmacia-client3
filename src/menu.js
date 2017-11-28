@@ -48,13 +48,13 @@ const menus = [
   {
     path: '/catalogo',
     title: 'Catalogo',
-    icon: '',
+    icon: 'list',
     routes: [
       {
         path: '/catalogo/categorias',
         title: 'Categorias',
         replace: '/catalogo/categorias/list',
-        icon: 'navicon',
+        icon: 'archive',
         routes: [
           {
             path: '/catalogo/categorias/list',
@@ -179,7 +179,7 @@ const menus = [
       },
       {
         path: '/catalogo/ventas',
-        title: 'ventas!',
+        title: 'Ventas',
         replace: '/catalogo/ventas/list',
         icon: 'shopping-cart',
         routes: [
@@ -264,13 +264,13 @@ const menus = [
 
       {
         path: '/catalogo/autors',
-        title: 'autors!',
+        title: 'autors',
         replace: '/catalogo/autors/list',
         icon: 'list',
         routes: [
           {
             path: '/catalogo/autors/list',
-            title: 'list autors!',
+            title: 'list autors',
           },
           {
             path: '/catalogo/autors/list2',

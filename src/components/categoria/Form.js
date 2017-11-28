@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';    
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux'
+import Snackbar from 'material-ui/Snackbar';
+import Fade from 'material-ui/transitions/Fade';
 import Card, { CardHeader, CardContent } from 'material-ui/Card'
 import { save, getById, update } from '../../actions/categoria-action'
 
@@ -67,33 +69,48 @@ class Form extends Component {
             })
         }
     }
+    handleClick = () => {
+        this.setState({ open: true });
+      };
+    
+      handleRequestClose = () => {
+        this.setState({ open: false });
+      };
 
     render() {
-        //console.log(JSON.stringify(this.props))
-        //const { list } = this.props
         return (
             <div>
-                 <Card>
-                 <CardHeader
+                <Card>
+                    <CardHeader
                     title="Formulario de Catalogo"
-                />
-                 <CardContent>  
+                    />
+                <CardContent>  
                 <TextField
-                value={this.state.nombre}
-                onChange={this.handleInputChange}
-                name="nombre"
-                label="Nombre Almacen"
-                placeholder="Nombre"
-                multiline
-                margin="normal"
+                    value={this.state.nombre}
+                    onChange={this.handleInputChange}
+                    name="nombre"
+                    label="Nombre Almacen"
+                    placeholder="Nombre"
+                    multiline
+                    margin="normal"
                 />
-                <br></br>
+                 <br></br>
                 <form onSubmit={this.handleSubmit}>
-                    <Button type="submit" raised color="primary">
-                    <strong>Guardar</strong>
+                    <Button onClick={this.handleClick} type="submit" raised color="primary">
+                    <strong >Guardar</strong>
+                    <Snackbar
+                        open={this.state.open}
+                        onRequestClose={this.handleRequestClose}
+                        transition={Fade}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">Se envio Correctamente</span>}
+                        />
                     </Button>{' '}
                     <Button raised color="accent" type="reset" onClick={(e) => this.props.history.push('/catalogo/categorias/list')}>
                             <strong>Cancelar</strong>
+                            
                         </Button>
                 </form>
                 </CardContent>

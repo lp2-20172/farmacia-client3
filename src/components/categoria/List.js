@@ -99,17 +99,16 @@ class List extends Component {
                                     </Button>
                                 </Link>
                                         
-                                <IconButton onClick={() => del(d.id)}
-                                             >
+                                <IconButton onClick={() => del(d.id)}>
                                 <DeleteIcon onClick={this.handleClick}/>
                                     <Snackbar
-                                    open={this.state.open}
-                                    onRequestClose={this.handleRequestClose}
-                                    transition={Fade}
-                                    SnackbarContentProps={{
-                                        'aria-describedby': 'message-id',
-                                    }}
-                                    message={<span id="message-id">Se ha Borrado Correctamente</span>}
+                                        open={this.state.open}
+                                        onRequestClose={this.handleRequestClose}
+                                        transition={Fade}
+                                        SnackbarContentProps={{
+                                            'aria-describedby': 'message-id',
+                                        }}
+                                        message={<span id="message-id">Se ha Borrado Correctamente</span>}
                                     />
                                 </IconButton>
                                         </TableCell>
