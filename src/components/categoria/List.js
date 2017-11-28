@@ -52,6 +52,8 @@ class List extends Component {
         }
         return (
             <div>
+                <Card> 
+                <CardContent>
             <h2>Lista de Categorias</h2>
             <label>
             <TextField
@@ -71,8 +73,7 @@ class List extends Component {
                 >
                     <strong>{'+ Agregar'}</strong>
                 </Button>
-            <Card> 
-                <CardContent>
+            
                 
 
                     <Paper style={{
