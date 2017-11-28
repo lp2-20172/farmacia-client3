@@ -1,25 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Card, { CardHeader, CardContent} from 'material-ui/Card'
-import Avatar from 'material-ui/Avatar'
-//import Typography from 'material-ui/Typography'
-//import TextField from 'material-ui/TextField';
 
 import { save, getById, update } from '../../actions/compra-action'
 import { connect } from 'react-redux'
 
 class Form extends Component {
-    /*
-        constructor(props) {
-            super(props);
-            this.state = {
-                d: {
-                    codigo: '',
-                    nombre: '',
-                },
-                saving: false
-            }
-        }*/
+    
     constructor(props) {
         super(props);
         this.state = {

@@ -30,7 +30,7 @@ const proveedorReducer = (state = initialState, action) => {
                 ...state,
             }
         /*
-    case CATEGORIA_FETCH:
+    case PROVEEDOR_FETCH:
         return {
             ...state,
             data: action.data

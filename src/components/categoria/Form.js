@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';    
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux'
-import Save from 'material-ui-icons/Save';
 import Card, { CardHeader, CardContent } from 'material-ui/Card'
 import { save, getById, update } from '../../actions/categoria-action'
 

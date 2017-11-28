@@ -55,7 +55,7 @@ class List extends Component {
                 onChange={this.handleInputChange}
                 name="q"
                 margin="normal"
-            /></label>
+            /></label>{' '}
             
             <Button
                     icon={{name: 'search'}}

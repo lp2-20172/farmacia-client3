@@ -1,6 +1,6 @@
 import client from './'
 
-const url = "/api-catalogo/proveedores/"
+const url = "/api-catalogo/proveedor/"
 export const PROVEEDOR_LIST = "PROVEEDOR_LIST"
 export const proveedorList = (list) => (
     {
@@ -73,28 +73,7 @@ export const getById = (id) => {
         })
     }
 }
-/*
-export const PROVEEDOR_FETCH = "PROVEEDOR_FETCH"
-export const proveedorFetch = (data) => (
-    {
-        type: PROVEEDOR_FETCH,
-        dALMACEN
-)
-export const getByIdx = (id) => {
-    return (dispatch) => {
-        return new Promise((resolve, reject) => {
-            try {
-                client.get(`${url}${id}`).then(r => {
-                    dispatch(proveedorFetch(r.data))
-                    resolve(r)
-                })
-            } catch (err) {
-                reject(err)
-            }
-        })
-    }
-}
-*/
+
 export const PROVEEDOR_UPDATE = "PROVEEDOR_UPDATE"
 export const proveedorUpdate = () => (
     {

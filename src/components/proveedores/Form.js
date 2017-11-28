@@ -8,8 +8,8 @@ class Form extends Component {
         super(props);
         this.state = {
             id: props.data ? props.data.id : null,
-            codigo: props.data ? props.data.codigo : '',
-            nombre: props.data ? props.data.nombre : ''
+            empresa: props.data ? props.data.empresa : '',
+            ruc: props.data ? props.data.ruc : ''
         }/*
         this.state = {
             id:  null,
@@ -24,8 +24,8 @@ class Form extends Component {
             this.props.getById(id).then(data => {
                 this.setState({
                     id: data.id,
-                    codigo: data.codigo,
-                    nombre: data.nombre
+                    empresa: data.empresa,
+                    ruc: data.ruc
                 });
             });
         }
@@ -67,17 +67,17 @@ class Form extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <label>Codigo:
+                    <label>Empresa:
             <input type="text"
-                            value={this.state.codigo}
+                            value={this.state.empresa}
                             onChange={this.handleInputChange}
-                            name="codigo" />
+                            name="empresa" />
                     </label><br />
-                    <label>Nombre:
+                    <label>Ruc:
             <input type="text"
-                            value={this.state.nombre}
+                            value={this.state.ruc}
                             onChange={this.handleInputChange}
-                            name="nombre" />
+                            name="ruc" />
                     </label>
                     <input type="submit" value="Submit" />
                 </form>

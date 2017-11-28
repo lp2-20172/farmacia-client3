@@ -10,9 +10,9 @@ import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Ta
 import Paper from 'material-ui/Paper';
 import Card, { CardContent } from 'material-ui/Card'
 import Button from 'material-ui/Button';
-import {
-    Link
-} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import Snackbar from 'material-ui/Snackbar';
+import Fade from 'material-ui/transitions/Fade';
 
 
 class List extends Component {
@@ -37,6 +37,13 @@ class List extends Component {
         this.props.getList(this.state.q)
     }
 
+    handleClick = () => {
+        this.setState({ open: true });
+    };
+
+    handleRequestClose = () => {
+        this.setState({ open: false });
+    };
     render() {
         
         let { list, del } = this.props
@@ -45,24 +52,24 @@ class List extends Component {
         }
         return (
             <div>
-            <h2>Almacen List</h2>
+            <h2>Lista de Proveedores</h2>
             <label>
             <TextField
-            id="search"
-            label="Buscar"
-            type="search" 
-            value={this.state.q}
-            onChange={this.handleInputChange}
-            name="q"
-            margin="normal"
-            /></label><tr></tr>
+                id="search"
+                label="Buscar"
+                type="search" 
+                value={this.state.q}
+                onChange={this.handleInputChange}
+                name="q"
+                margin="normal"
+            /></label>
             <Button
-                    icon={{name: 'search'}}
-                    component={Link}
-                    to="/catalogo/proveedores/new"
-                    raised color="accent"
+                icon={{name: 'search'}}
+                component={Link}
+                to="/catalogo/proveedores/new"
+                raised color="accent"
                 >
-                    {'Agregar'}
+                    <strong>{'+ Agregar'}</strong>
                 </Button>
             <Card> 
                 <CardContent>
@@ -75,8 +82,8 @@ class List extends Component {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>#</TableCell>
-                                    <TableCell >Nombre Empresa</TableCell>
-                                    <TableCell >N° de Ruc</TableCell>
+                                    <TableCell >Empresa</TableCell>
+                                    <TableCell >Ruc</TableCell>
                                     <TableCell >Opciones</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -94,8 +101,15 @@ class List extends Component {
                                     </Button>
                                 </Link>
                                         
-                                <IconButton onClick={() => del(d.id)}  aria-label="Delete">
-                                <DeleteIcon/>
+                                <IconButton onClick={() => del(d.id)}>
+                                <DeleteIcon onClick={this.handleClick}/>
+                                    <Snackbar
+                                        open={this.state.open}
+                                        onRequestClose={this.handleRequestClose}
+                                        transition={Fade}
+                                        SnackbarContentProps={{'aria-describedby': 'message-id',}}
+                                        message={<span id="message-id">Se ha Borrado Correctamente</span>}
+                                    />
                                 </IconButton>
                                         </TableCell>
                                     </TableRow>
