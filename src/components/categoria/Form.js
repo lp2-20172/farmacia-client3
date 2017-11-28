@@ -4,6 +4,7 @@ import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux'
 import Save from 'material-ui-icons/Save';
+import Card, { CardHeader, CardContent } from 'material-ui/Card'
 import { save, getById, update } from '../../actions/categoria-action'
 
 class Form extends Component {
@@ -73,7 +74,11 @@ class Form extends Component {
         //const { list } = this.props
         return (
             <div>
-                <center>
+                 <Card>
+                 <CardHeader
+                    title="Formulario de Catalogo"
+                />
+                 <CardContent>  
                 <TextField
                 value={this.state.nombre}
                 onChange={this.handleInputChange}
@@ -84,16 +89,16 @@ class Form extends Component {
                 margin="normal"
                 />
                 <br></br>
-                
                 <form onSubmit={this.handleSubmit}>
                     <Button type="submit" raised color="primary">
-                    <Save/>Guardar
-                    </Button>
+                    <strong>Guardar</strong>
+                    </Button>{' '}
                     <Button raised color="accent" type="reset" onClick={(e) => this.props.history.push('/catalogo/categorias/list')}>
-                            cancelar
+                            <strong>Cancelar</strong>
                         </Button>
                 </form>
-                </center>
+                </CardContent>
+                </Card>
             </div>
             
         )

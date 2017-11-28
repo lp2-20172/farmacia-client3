@@ -109,7 +109,7 @@ class Form extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <Button type="submit" raised color="primary">
                         Guardar
-                    </Button>
+                    </Button>{' '}
                     <Button
                             raised
                             color="accent"

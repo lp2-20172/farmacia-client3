@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';    
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux'
+import Card, { CardContent } from 'material-ui/Card'
+import Save from 'material-ui-icons/Save';
 import { save, getById, update } from '../../actions/unidadMed-action'
 
 class Form extends Component {
@@ -72,13 +74,15 @@ class Form extends Component {
         //const { list } = this.props
         return (
             <div>
+                <Card>
+                <CardContent>
                 <center>
                 <TextField
                 value={this.state.codigo}
                 onChange={this.handleInputChange}
                 name="codigo"
-                label="codigo Almacen"
-                placeholder="codigo"
+                label="Codigo"
+                placeholder="ingrese numero"
                 multiline
                 margin="normal"
                 />
@@ -87,17 +91,23 @@ class Form extends Component {
                 value={this.state.nombre}
                 onChange={this.handleInputChange}
                 name="nombre"
-                label="nombre"
-                placeholder="nombre"
+                label="Nombre"
+                placeholder="Example (Mg, Kg, mml)"
                 multiline
                 margin="normal"
                 />
                 <form onSubmit={this.handleSubmit}>
-                    <Button type="submit" raised color="primary">
-                        Guardar
-                    </Button>
+                <Button type="submit" raised color="primary">
+                <Save/>Guardar
+                </Button>{'  '}
+                    <Button raised color="accent" type="reset" onClick={(e) => this.props.history.push('/catalogo/categorias/list')}>
+                            cancelar
+                        </Button>
                 </form>
                 </center>
+                </CardContent>
+
+            </Card>
             </div>
             
         )
