@@ -12,7 +12,7 @@ const menus = [
   },
   {
     path: '/tacos',
-    title: 'Usuarios',
+    title: 'core',
     icon: 'list',
     routes: [
       {
@@ -24,24 +24,6 @@ const menus = [
         path: '/tacos/cart',
         title: 'Example',
         icon: 'yelp',
-      }
-    ]
-  },
-  
-  {
-    path: '/xtacos2',
-    title: 'tacos2',
-    icon: 'list',
-    routes: [
-      {
-        path: '/xtacos2/bus2',
-        title: 'Example',
-        icon: 'gg',
-      },
-      {
-        path: '/xtacos2/cart2',
-        title: 'Example',
-        icon: 'send',
       }
     ]
   },
