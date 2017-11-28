@@ -10,9 +10,9 @@ import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Ta
 import Paper from 'material-ui/Paper';
 import Card, { CardContent } from 'material-ui/Card'
 import Button from 'material-ui/Button';
-import {
-    Link
-} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import Snackbar from 'material-ui/Snackbar';
+import Fade from 'material-ui/transitions/Fade';
 
 
 class List extends Component {
@@ -36,11 +36,14 @@ class List extends Component {
         })
         this.props.getList(this.state.q)
     }
-    handleSubmit(event) {
-        alert('esta seguro? ' + this.state.value);
-        event.preventDefault();
-      }
 
+    handleClick = () => {
+        this.setState({ open: true });
+    };
+
+    handleRequestClose = () => {
+        this.setState({ open: false });
+    };
     render() {
         
         let { list, del } = this.props
@@ -49,11 +52,10 @@ class List extends Component {
         }
         return (
             <div>
+                <Card> 
+                <CardContent>
             <h2>Lista de Ventas</h2>
             
-            
-            <Card> 
-            <CardContent>
             <TextField
                 id="search"
                 label="Buscar"
@@ -62,16 +64,16 @@ class List extends Component {
                 onChange={this.handleInputChange}
                 name="q"
                 margin="normal"
-            />
-                <Button
-                    icon={{name: 'search'}}
-                    component={Link}
-                    to="/catalogo/ventas/new"
-                    raised color="accent"
-                    >
-                        <strong>{'+ Agregar'}</strong>
-                    </Button>
-                
+            />{' '}
+            <Button
+                icon={{name: 'search'}}
+                component={Link}
+                to="/catalogo/ventas/new"
+                raised color="accent"
+                >
+                    <strong>{'+ Agregar'}</strong>
+                </Button>
+            
                 
 
                     <Paper style={{
@@ -81,9 +83,13 @@ class List extends Component {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>#</TableCell>
-                                    <TableCell>Nombre</TableCell>
-                                    <TableCell>Direccion</TableCell>
-                                    <TableCell>Opciones</TableCell>
+                                    <TableCell >Numero Documento</TableCell>
+                                    <TableCell >Fecha</TableCell>
+                                    <TableCell >Total</TableCell>
+                                    <TableCell >Vendedor</TableCell>
+                                    <TableCell >Cliente</TableCell>
+                                    <TableCell >Almacen</TableCell>
+                                    <TableCell >Opciones</TableCell>
                                 </TableRow>
                             </TableHead>
 
@@ -91,17 +97,30 @@ class List extends Component {
                                 {list.map((d, index) =>
                                     <TableRow key={index}>
                                         <TableCell numeric>{index + 1}</TableCell>
-                                        <TableCell >{d.nombre}</TableCell>
-                                        <TableCell >{d.direccion}</TableCell>
+                                        <TableCell >{d.nro_doc}</TableCell>
+                                        <TableCell >{d.fecha}</TableCell>
+                                        <TableCell >{d.total}</TableCell>
+                                        <TableCell >{d.vendedor}</TableCell>
+                                        <TableCell >{d.cliente}</TableCell>
+                                        <TableCell >{d.almacen}</TableCell>
                                         <TableCell >
-                                        <Link to={`/catalogo/ventas/edit/${d.id}`}>
+                                        <Link to={`/catalogo/ventasl/edit/${d.id}`}>
                                     <Button  aria-label="edit">
                                         <ModeEditIcon />
                                     </Button>
                                 </Link>
                                         
-                                <IconButton onClick={() => del(d.id)}  aria-label="Delete">
-                                <DeleteIcon/>
+                                <IconButton onClick={() => del(d.id)}>
+                                <DeleteIcon onClick={this.handleClick}/>
+                                    <Snackbar
+                                        open={this.state.open}
+                                        onRequestClose={this.handleRequestClose}
+                                        transition={Fade}
+                                        SnackbarContentProps={{
+                                            'aria-describedby': 'message-id',
+                                        }}
+                                        message={<span id="message-id">Se ha Borrado Correctamente</span>}
+                                    />
                                 </IconButton>
                                         </TableCell>
                                     </TableRow>

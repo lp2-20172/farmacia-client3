@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';    
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux'
+import Snackbar from 'material-ui/Snackbar';
+import Fade from 'material-ui/transitions/Fade';
+import Card, { CardHeader, CardContent } from 'material-ui/Card'
 import { save, getById, update } from '../../actions/almacen-action'
 
 class Form extends Component {
@@ -10,13 +13,13 @@ class Form extends Component {
         super(props);
         this.state = {
             id: props.data ? props.data.id : null,
-            codigo: props.data ? props.data.codigo : '',
-            nombre: props.data ? props.data.nombre : ''
+            nombre: props.data ? props.data.nombre : '',
+            direccion: props.data ? props.data.direccion : ''
         }/*
         this.state = {
             id:  null,
-            codigo:'',
-            nombre: ''
+            nombre:'',
+            direccion: ''
         }*/
     }
     handleSubmit(event) {
@@ -30,8 +33,8 @@ class Form extends Component {
             this.props.getById(id).then(data => {
                 this.setState({
                     id: data.id,
-                    codigo: data.codigo,
-                    nombre: data.nombre
+                    nombre: data.nombre,
+                    direccion: data.direccion
                 });
             });
         }
@@ -66,38 +69,59 @@ class Form extends Component {
             })
         }
     }
+    handleClick = () => {
+        this.setState({ open: true });
+      };
+    
+      handleRequestClose = () => {
+        this.setState({ open: false });
+      };
 
     render() {
-        //console.log(JSON.stringify(this.props))
-        //const { list } = this.props
         return (
             <div>
-                <center>
+                <Card>
+                    <CardHeader
+                    title="Formulario de Almacen"
+                    />
+                <CardContent>  
                 <TextField
-                value={this.state.nombre}
-                onChange={this.handleInputChange}
-                name="nombre"
-                label="Nombre Almacen"
-                placeholder="Nombre"
-                multiline
-                margin="normal"
-                />
-                <br></br>
+                    value={this.state.nombre}
+                    onChange={this.handleInputChange}
+                    name="nombre"
+                    placeholder="Nombre"
+                    multiline
+                    margin="normal"
+                /><br></br>
                 <TextField
-                value={this.state.direccion}
-                onChange={this.handleInputChange}
-                name="direccion"
-                label="Direccion"
-                placeholder="Direccion"
-                multiline
-                margin="normal"
+                    value={this.state.direccion}
+                    onChange={this.handleInputChange}
+                    name="direccion"
+                    placeholder="Direccion"
+                    multiline
+                    margin="normal"
                 />
+                 <br></br>
                 <form onSubmit={this.handleSubmit}>
-                    <Button type="submit" raised color="primary">
-                        Guardar
-                    </Button>
+                    <Button onClick={this.handleClick} type="submit" raised color="primary">
+                    <strong >Guardar</strong>
+                    <Snackbar
+                        open={this.state.open}
+                        onRequestClose={this.handleRequestClose}
+                        transition={Fade}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">Se envio Correctamente</span>}
+                        />
+                    </Button>{' '}
+                    <Button raised color="accent" type="reset" onClick={(e) => this.props.history.push('/catalogo/almacenes/list')}>
+                            <strong>Cancelar</strong>
+                            
+                        </Button>
                 </form>
-                </center>
+                </CardContent>
+                </Card>
             </div>
             
         )

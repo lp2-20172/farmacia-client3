@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';    
 import TextField from 'material-ui/TextField';
-import { save, getById, update } from '../../actions/producto-action'
 import { connect } from 'react-redux'
-
+import Snackbar from 'material-ui/Snackbar';
+import Fade from 'material-ui/transitions/Fade';
+import Card, { CardHeader, CardContent } from 'material-ui/Card'
+import { save, getById, update } from '../../actions/producto-action'
 
 class Form extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -20,32 +21,19 @@ class Form extends Component {
             unidad_med: props.data ? props.data.unidad_med : '',
             almacen: props.data ? props.data.almacen : '',
             categoria: props.data ? props.data.categoria : ''
-        }
+        }/*
+        this.state = {
+            id:  null,
+            codigo:'',
+            nombre: ''
+        }*/
     }
+    handleSubmit(event) {
+        alert('Your favorite flavor is: ' + this.state.value);
+        event.preventDefault();
+      }
 
-    componentWillMount = () => {
-        /*
-        const { id } = this.props.match.params
-        if (id) {
-            //this.props.getById(id)
-            //this.props.getItemAsync(id)
-
-            this.props.getById(id).then(data => {
-                console.log('componentWillReceiveProps data:' + JSON.stringify(data))
-                this.setState({
-                    id: data.id,
-                    codigo: data.codigo,
-                    nombre: data.nombre
-                })
-            }).catch(e => {
-
-            });
-        }
-        */
-    }
-
-
-    componentDidMount = () => {
+    componentDidMount() {
         const { id } = this.props.match.params
         if (id) {
             this.props.getById(id).then(data => {
@@ -62,88 +50,88 @@ class Form extends Component {
                 });
             });
         }
-    }
 
-    handleChange = (event) => {
-        //this.setState({ value: event.target.value });
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
+    }
+    handleInputChange = event => {
+        const target = event.target
+        const value = target.type === 'checkbox' ? target.checked : target.value
+        const name = target.name
 
         this.setState({
             [name]: value
-        });
-    }
+        })
 
-    handleSubmit = (event) => {
+    }
+    handleSubmit = event => {
+        event.preventDefault()
+        console.log('d=' + JSON.stringify(this.state))
+
         const { id } = this.props.match.params
         if (id) {
-            //console.log('handleSubmit state:' + JSON.stringify(this.state))
-            this.props.update(this.state, this.props.history)
+            this.props.update(this.state, this.props.history).then(r => {
+                r.push('/catalogo/productos/list')
+            }, error => {
+                throw (error)
+            })
         } else {
-            this.props.save(this.state, this.props.history)
+            this.props.save(this.state, this.props.history).then(r => {
+                r.push('/catalogo/productos/list')
+            }, error => {
+                throw (error)
+            })
         }
-        //this.props.history.push('/categorias/list');
-        event.preventDefault();
     }
+    handleClick = () => {
+        this.setState({ open: true });
+      };
+    
+      handleRequestClose = () => {
+        this.setState({ open: false });
+      };
 
-    handleOpen = () => {
-        this.setState({open: true});
-      }
-   
     render() {
-        //const { data } = this.props
         return (
-        <div>
-            <TextField
-                value={this.state.nombre}
-                onChange={this.handleInputChange}
-                name="nombre"
-                label="Nombre Producto"
-                placeholder="Nombre"
-                multiline
-                margin="normal"
-            />
-            <br></br>
-            <TextField
-                value={this.state.codigo}
-                onChange={this.handleInputChange}
-                name="codigo"
-                placeholder="codigo"
-                multiline
-                margin="normal"
-            />
-            <br></br>
-            <TextField
-                value={this.state.detalle}
-                onChange={this.handleInputChange}
-                name="detalle"
-                placeholder="detalle"
-                multiline
-                margin="normal"
-            />
-            <br></br>
+            <div>
+                <Card>
+                    <CardHeader
+                    title="Formulario de Producto"
+                    />
+                <CardContent>  
                 <TextField
-                value={this.state.fechaVen}
-                onChange={this.handleInputChange}
-                name="fechaVen"
-                placeholder="fechaVen"
-                multiline
-                margin="normal"
-            />
-        
+                    value={this.state.nombre}
+                    onChange={this.handleInputChange}
+                    name="nombre"
+                    label="Nombre Almacen"
+                    placeholder="Nombre"
+                    multiline
+                    margin="normal"
+                />
+                 <br></br>
+                <form onSubmit={this.handleSubmit}>
+                    <Button onClick={this.handleClick} type="submit" raised color="primary">
+                    <strong >Guardar</strong>
+                    <Snackbar
+                        open={this.state.open}
+                        onRequestClose={this.handleRequestClose}
+                        transition={Fade}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">Se envio Correctamente</span>}
+                        />
+                    </Button>{' '}
+                    <Button raised color="accent" type="reset" onClick={(e) => this.props.history.push('/catalogo/categorias/list')}>
+                            <strong>Cancelar</strong>
+                            
+                        </Button>
+                </form>
+                </CardContent>
+                </Card>
+            </div>
             
-            <form onSubmit={this.handleSubmit}>
-                <Button type="submit" raised color="primary">
-                    Guardar
-                </Button>
-            </form>
-            
-        </div>
         )
     }
 }
-
 Form.propTypes = {
     data: PropTypes.object
 }
@@ -151,7 +139,7 @@ Form.propTypes = {
 const mapStateToProps = (state, props) => {
     if (props.match.params.id) {
         return {
-            data: state.producto.list.find(item => item.id + '' === props.match.params.id + '')
+            data: state.categoria.list.find(item => item.id + '' === props.match.params.id + '')
         }
     }
     return {
@@ -159,19 +147,8 @@ const mapStateToProps = (state, props) => {
     }
 
 }
-/*
-const mapDispatchToProps = (dispatch) => {
-    return {
-        save: (d, h) => { dispatch(save(d, h)) },
-        getList: (q) => { dispatch(getList(q)) },
-        getById: (id) => { dispatch(getById(id)) },
-        update: (d, h) => { dispatch(update(d, h)) },
-    }
-}
-*/
 export default connect(mapStateToProps, {
     save,
     getById,
     update
-
 })(Form)

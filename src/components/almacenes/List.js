@@ -10,9 +10,9 @@ import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Ta
 import Paper from 'material-ui/Paper';
 import Card, { CardContent } from 'material-ui/Card'
 import Button from 'material-ui/Button';
-import {
-    Link
-} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import Snackbar from 'material-ui/Snackbar';
+import Fade from 'material-ui/transitions/Fade';
 
 
 class List extends Component {
@@ -37,6 +37,13 @@ class List extends Component {
         this.props.getList(this.state.q)
     }
 
+    handleClick = () => {
+        this.setState({ open: true });
+    };
+
+    handleRequestClose = () => {
+        this.setState({ open: false });
+    };
     render() {
         
         let { list, del } = this.props
@@ -45,28 +52,28 @@ class List extends Component {
         }
         return (
             <div>
-            <h2>Lista Almacen</h2>
-            <label>
-            <TextField
-            id="search"
-            label="Buscar"
-            type="search" 
-            value={this.state.q}
-            onChange={this.handleInputChange}
-            name="q"
-            margin="normal"
-            /></label>
+                <Card> 
+                <CardContent>
+            <h2>Lista de Almacenes</h2>
             
+            <TextField
+                id="search"
+                label="Buscar"
+                type="search" 
+                value={this.state.q}
+                onChange={this.handleInputChange}
+                name="q"
+                margin="normal"
+            />{' '}
             <Button
-                    icon={{name: 'search'}}
-                    component={Link}
-                    to="/catalogo/almacenes/new"
-                    raised color="accent"
+                icon={{name: 'search'}}
+                component={Link}
+                to="/catalogo/almacenes/new"
+                raised color="accent"
                 >
                     <strong>{'+ Agregar'}</strong>
                 </Button>
-            <Card> 
-                <CardContent>
+            
                 
 
                     <Paper style={{
@@ -95,8 +102,17 @@ class List extends Component {
                                     </Button>
                                 </Link>
                                         
-                                <IconButton onClick={() => del(d.id)}  aria-label="Delete">
-                                <DeleteIcon/>
+                                <IconButton onClick={() => del(d.id)}>
+                                <DeleteIcon onClick={this.handleClick}/>
+                                    <Snackbar
+                                        open={this.state.open}
+                                        onRequestClose={this.handleRequestClose}
+                                        transition={Fade}
+                                        SnackbarContentProps={{
+                                            'aria-describedby': 'message-id',
+                                        }}
+                                        message={<span id="message-id">Se ha Borrado Correctamente</span>}
+                                    />
                                 </IconButton>
                                         </TableCell>
                                     </TableRow>

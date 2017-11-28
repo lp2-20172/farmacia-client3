@@ -1,125 +1,159 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Card, { CardHeader, CardContent} from 'material-ui/Card'
-
-import { save, getById, update } from '../../actions/compra-action'
+import Button from 'material-ui/Button';    
+import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux'
+import Snackbar from 'material-ui/Snackbar';
+import Fade from 'material-ui/transitions/Fade';
+import Card, { CardHeader, CardContent } from 'material-ui/Card'
+import { save, getById, update } from '../../actions/categoria-action'
+import { getList as getProveedorList } from '../../actions/proveedor-action'
 
 class Form extends Component {
-    
     constructor(props) {
         super(props);
         this.state = {
             id: props.data ? props.data.id : null,
-            codigo: props.data ? props.data.codigo : '',
-            nombre: props.data ? props.data.nombre : ''
+            nro_doc: props.data ? props.data.nro_doc : '',
+            precio_total: props.data ? props.data.precio_total : '',
+            proveedor: props.data ? props.data.proveedor : '',
+            almacen: props.data ? props.data.almacen : '',
+            comprador: props.data ? props.data.comprador : ''
         }
     }
-    /*
-        componentWillReceiveProps = (nextProps) => { // Load Asynchronously
-            const { data } = nextProps;
-            console.log('componentWillReceiveProps data:' + JSON.stringify(data))
-            this.setState({
-                id: data.id,
-                codigo: data.codigo,
-                nombre: data.nombre
-            })
-        }
-    */
-    componentWillMount = () => {
-        /*
-        const { id } = this.props.match.params
-        if (id) {
-            //this.props.getById(id)
-            //this.props.getItemAsync(id)
-            this.props.getById(id).then(data => {
-                console.log('componentWillReceiveProps data:' + JSON.stringify(data))
-                this.setState({
-                    id: data.id,
-                    codigo: data.codigo,
-                    nombre: data.nombre
-                })
-            }).catch(e => {
-            });
-        }
-        */
-    }
+    handleSubmit(event) {
+        alert('Your favorite flavor is: ' + this.state.value);
+        event.preventDefault();
+      }
 
-
-    componentDidMount = () => {
+    componentDidMount() {
         const { id } = this.props.match.params
         if (id) {
             this.props.getById(id).then(data => {
                 this.setState({
                     id: data.id,
-                    codigo: data.codigo,
-                    nombre: data.nombre
+                    nro_doc: data.nro_doc,
+                    precio_total: data.precio_total,
+                    proveedor: data.proveedor,
+                    almacen: data.almacen,
+                    comprador: data.comprador
                 });
             });
         }
-    }
 
-    handleChange = (event) => {
-        //this.setState({ value: event.target.value });
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
+    }
+    
+    handleInputChange = event => {
+        const target = event.target
+        const value = target.type === 'checkbox' ? target.checked : target.value
+        const name = target.name
 
         this.setState({
             [name]: value
-        });
-    }
+        })
 
-    handleSubmit = (event) => {
+    }
+    handleSubmit = event => {
+        event.preventDefault()
+        console.log('d=' + JSON.stringify(this.state))
+
         const { id } = this.props.match.params
         if (id) {
-            this.props.update(this.state, this.props.history)
+            this.props.update(this.state, this.props.history).then(r => {
+                r.push('/catalogo/compras/list')
+            }, error => {
+                throw (error)
+            })
         } else {
-            this.props.save(this.state, this.props.history)
+            this.props.save(this.state, this.props.history).then(r => {
+                r.push('/catalogo/compras/list')
+            }, error => {
+                throw (error)
+            })
         }
-        event.preventDefault();
     }
+    handleClick = () => {
+        this.setState({ open: true });
+      };
+    
+    handleRequestClose = () => {
+    this.setState({ open: false });
+    };
 
     render() {
+        let { proveedor_list } = this.props
         return (
-            <Card>
-                <CardHeader>
-                    Compras
-                </CardHeader>
-                <CardContent>
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            Numero Documento:
-                            <input type="file" name="nro_doc" value={this.state.nro_doc} onChange={this.handleChange} />
-                        </label>
-                        <br />
-                        <label>
-                            Precio Total:
-                            <input type="text" name="precio_total" value={this.state.precio_total} onChange={this.handleChange} />
-                        </label>
-                        <br />
-                        <select>
-                        <option value="grapefruit">Grapefruit</option>
-                        <option value="lime">Lime</option>
-                        <option selected value="coconut">Coconut</option>
-                        <option value="mango">Mango</option>
-                      </select>                        <br />
-                        <br />
-                        <br>
-                        
-                        </br>
-                        <label>
-                            Comprador: Foranie Key
-                            <input type="text" name="comprador" value={this.state.comprador} onChange={this.handleChange} />
-                        </label>
-                        <input type="submit" value="Submit" />
-                    </form>
+            <div>
+                <Card>
+                    <CardHeader
+                    title="Formulario de Compras"
+                    />
+                <CardContent>  
+                <TextField
+                    value={this.state.nro_doc}
+                    onChange={this.handleInputChange}
+                    name="nro_doc"
+                    label="Numero Docunto"
+                    placeholder="solo numeros (1,2,3)"
+                    multiline
+                    margin="normal"
+                />
+                 <br></br>
+                 <TextField
+                    value={this.state.precio_total}
+                    onChange={this.handleInputChange}
+                    name="precio_total"
+                    label="Precio Total"
+                    placeholder="solo numeros (1,2,3)"
+                    multiline
+                    margin="normal"
+                /><br></br>
+                <TextField
+                    select
+                    name="proveedor"
+                    value={this.state.proveedor}
+                    onChange={this.handleChange}
+                    margin="normal"
+                    SelectProps={{
+                        shrink: true,
+                        native: true,
+                        MenuProps: {
+                            name: "proveedor"
+                        },
+                    }}
+                >
+                    {proveedor_list.map((d, index) =>
+                        <option key={index} value={d.id}>
+                            {d.empresa}
+                        </option>
+                    )}
+                </TextField>
+                 <br></br>
+                <form onSubmit={this.handleSubmit}>
+                    <Button onClick={this.handleClick} type="submit" raised color="primary">
+                    <strong >Guardar</strong>
+                    <Snackbar
+                        open={this.state.open}
+                        onRequestClose={this.handleRequestClose}
+                        transition={Fade}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">Se envio Correctamente</span>}
+                        />
+                    </Button>{' '}
+                    <Button raised color="accent" type="reset" onClick={(e) => this.props.history.push('/catalogo/categorias/list')}>
+                            <strong>Cancelar</strong>
+                            
+                        </Button>
+                </form>
                 </CardContent>
-            </Card>
+                </Card>
+            </div>
+            
         )
     }
 }
-
 Form.propTypes = {
     data: PropTypes.object
 }
@@ -127,7 +161,7 @@ Form.propTypes = {
 const mapStateToProps = (state, props) => {
     if (props.match.params.id) {
         return {
-            data: state.compra.list.find(item => item.id + '' === props.match.params.id + '')
+            data: state.categoria.list.find(item => item.id + '' === props.match.params.id + '')
         }
     }
     return {
@@ -135,19 +169,8 @@ const mapStateToProps = (state, props) => {
     }
 
 }
-/*
-const mapDispatchToProps = (dispatch) => {
-    return {
-        save: (d, h) => { dispatch(save(d, h)) },
-        getList: (q) => { dispatch(getList(q)) },
-        getById: (id) => { dispatch(getById(id)) },
-        update: (d, h) => { dispatch(update(d, h)) },
-    }
-}
-*/
 export default connect(mapStateToProps, {
     save,
     getById,
     update
-
 })(Form)
